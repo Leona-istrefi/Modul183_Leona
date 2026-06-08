@@ -7,7 +7,7 @@
 | Name                        | Beschreibung                                                                                                  | Zeit (h) |
 |-----------------------------|---------------------------------------------------------------------------------------------------------------|----------|
 | ~~Projektplanung~~            | ~~Architektur planen und Technologien festlegen. Datenbankstruktur skizzieren.~~                                  | ~~0.5~~    |
-| Projekt aufsetzen           | Spring Boot und React Projekt erstellen. Ordnerstruktur und Dependencies einrichten.                          | 1        |
+| ~~Projekt aufsetzen~~           | ~~Spring Boot und React Projekt erstellen. Ordnerstruktur und Dependencies einrichten.~~                          | ~~1~~        |
 | Datenbank aufsetzen         | PostgreSQL installieren und konfigurieren. Tabellen für users, listings und images erstellen.                 | 1.5      |
 | User Entity & Repository    | Java Entity-Klassen für den User erstellen. JPA Repository einrichten.                                        | 1        |
 | Registrierung Backend       | Register-Endpunkt implementieren mit Salt generieren und bcrypt Hashing. Benutzername und Hash in DB speichern. | 2        |
@@ -27,9 +27,9 @@
 | **Total**                   |                | **25 h** |
 
 ## Arbeitsjournal 
-| Datum               | Zeit (h)                     | Was wurde erledigt                                                                          |
-|---------------------|------------------------------|---------------------------------------------------------------------------------------------|
-| 08.06.2026          | 14:30-15:00<br/> 15:30-16:30 | Ich habe meine Projektplanung im README.md festgelegt<br/> Ich habe mein Projekt aufgesetzt |
+| Datum               | Zeit (h)                                                                 | Was wurde erledigt                                                                                                                                                                                   |
+|---------------------|--------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 08.06.2026          | 13:55-14:30<br/>14:30-15:00<br/> 15:00-15:30<br/>15:30-16:30<br/> 16:30-17:00 | Einführung in den Unterricht und Videos schauen.<br/>Ich habe meine Projektplanung im README.md festgelegt<br/> Pause <br/>Ich habe mein Projekt aufgesetzt<br/> ich habe meine datenbank aufsetzen. |
 
 ----------------------------------------------------------------------------------------------------------------
 # Projektplanung
@@ -144,3 +144,58 @@ VerkaufsPage/
 | feature/image-uploads | bild upload
 | feature/frontend      | Alle react Seiten 
 
+# Datenbank aufsetzen
+## PostgreSQL installieren
+1. ich ging auf https://www.postgresql.org/download/ und wählte windows aus
+2. ich habe den Installer heruntergeladen und gestartet 
+3. Ich habe alles auf Standard gelassen und mir mein **Passwort** gemerkt 
+4. Der port bleibt auf 5432
+
+## Datenbank erstellen
+<p> Nach der Installation öffne ich **SQL Shell (psql)** und gebe folgendes ein. (Ich drücke bei allem Enter ausser beim Passwort):</p>
+
+- Server [localhost]:
+- Database [postgres]:
+- Port [5432]:
+- Username [postgres]:
+- Password: meinPasswort"
+
+<p> Danach erstelle ich meine Datenbank namens kleidungsshop mit diesem command: </p>
+
+```sql
+CREATE DATABASE kleidungsshop;
+\c kleidungsshop
+```
+
+<p> Nun create ich eine Tabelle für die users, listings und images, welche ich später brauchen werden. </p>
+
+```sql
+--Tabelle für die users--
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    salt VARCHAR(255) NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+--Tabelle für die listings-- 
+CREATE TABLE listings (
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(id),
+    name VARCHAR(100) NOT NULL,
+    zustand VARCHAR(50) NOT NULL,
+    groesse VARCHAR(20) NOT NULL,
+    preis DECIMAL(10,2) NOT NULL,
+    beschreibung TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+--Tabelle für die iamges--
+CREATE TABLE images (
+    id SERIAL PRIMARY KEY,
+    listing_id INT REFERENCES listings(id),
+    filepath VARCHAR(255) NOT NULL
+);
+```
