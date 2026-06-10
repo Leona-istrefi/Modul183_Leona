@@ -10,7 +10,7 @@
 | ~~Projekt aufsetzen~~           | ~~Spring Boot und React Projekt erstellen. Ordnerstruktur und Dependencies einrichten.~~                        | ~~1~~      |
 | ~~Datenbank aufsetzen~~         | ~~PostgreSQL installieren und konfigurieren. Tabellen für users, listings und images erstellen.~~               | ~~1.5~~      |
 | ~~User Entity & Repository~~    | ~~Java Entity-Klassen für den User erstellen. JDBC Repository einrichten.~~                                       | ~~1~~        |
-| Registrierung Backend       | Register-Endpunkt implementieren mit Salt generieren und bcrypt Hashing. Benutzername und Hash in DB speichern. | 2        |
+| ~~Registrierung Backend~~       | ~~Register-Endpunkt implementieren mit Salt generieren und bcrypt Hashing. Benutzername und Hash in DB speichern.~~ | ~~2~~        |
 | Login Backend               | Login-Endpunkt implementieren und Passwort mit Hash vergleichen. JWT-Token zurückgeben.                         | 2        |
 | Listing Entity & Repository | Java Entity für Inserate erstellen mit allen Feldern. JPA Repository und Service einrichten.                    | 1        |
 | Listing CRUD Backend        | Endpunkte für erstellen, abrufen und löschen von Inseraten. Nur eingeloggte User dürfen inserieren.             | 2        |
@@ -27,9 +27,10 @@
 | **Total**                   |                                                                                                                 | **25 h** |
 
 ## Arbeitsjournal 
-| Datum               | Zeit (h)                                                                                      | Was wurde erledigt                                                                                                                                                                                                                                                |
-|---------------------|-----------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 08.06.2026          | 13:55-14:30<br/>14:30-15:00<br/> 15:00-15:30<br/>15:30-16:30<br/> 16:30-17:00<br/>17:00-17:35 | Einführung in den Unterricht und Videos schauen.<br/>Ich habe meine Projektplanung im README.md festgelegt<br/> Pause <br/>Ich habe mein Projekt aufgesetzt<br/> ich habe meine datenbank aufsetzen.<br/> Angefangen meine Java user entity klassen zu erstellen. |
+| Datum      | Zeit (h)                                                                                      | Was wurde erledigt                                                                                                                                                                                                                                                |
+|------------|-----------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 08.06.2026 | 13:55-14:30<br/>14:30-15:00<br/> 15:00-15:30<br/>15:30-16:30<br/> 16:30-17:00<br/>17:00-17:35 | Einführung in den Unterricht und Videos schauen.<br/>Ich habe meine Projektplanung im README.md festgelegt<br/> Pause <br/>Ich habe mein Projekt aufgesetzt<br/> ich habe meine datenbank aufsetzen.<br/> Angefangen meine Java user entity klassen zu erstellen. |
+| 10.06.2026 | 19:00-21:00                                                                                   | Angefangen meine Register Points zu implementieren                                                                                                                                                                                                                |
 
 ----------------------------------------------------------------------------------------------------------------
 # Projektplanung
@@ -217,3 +218,18 @@ Connection conn = DatabaseConnection.getConnection();
 ```
 
 > **Wichtig:** Das Datenbankpasswort wird in einer `.env` Datei gespeichert und nie direkt im Code geschrieben. Die `.env` Datei ist in der `.gitignore` eingetragen und wird nicht auf GitHub gepusht.
+ 
+# Registrierung im Backend 
+<p> Wenn sich ein User registriert, wird sein Passwort sicher gespeichert. Dafür wird ein zufälliger Salt generiert und zusammen mit einem geheimen Pepper mit bcrypt gehasht.</p>
+
+## Ablauf
+1. User gibt Username, Email und Passwort ein 
+2. Ein zufälliger Salt wird generiert 
+3. Passwort wird mit Salt und Pepper kombiniert und mit bcrypt gehasht 
+4. Username, Salt und Hash werden in der Datenbank gespeichert 
+5. Das Originalpasswort wird nie gespeichert
+
+## Sicherheit 
+- **Salt** wird zufälig pro User generiert und in der DB gespeichert 
+- **Pepper** ist ein geheimer Schlüssel der nur in der '.env' Datei steht
+- **bcrypt** ist der Hashing-Algorithmus
