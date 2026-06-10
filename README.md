@@ -11,7 +11,7 @@
 | ~~Datenbank aufsetzen~~         | ~~PostgreSQL installieren und konfigurieren. Tabellen für users, listings und images erstellen.~~               | ~~1.5~~      |
 | ~~User Entity & Repository~~    | ~~Java Entity-Klassen für den User erstellen. JDBC Repository einrichten.~~                                       | ~~1~~        |
 | ~~Registrierung Backend~~       | ~~Register-Endpunkt implementieren mit Salt generieren und bcrypt Hashing. Benutzername und Hash in DB speichern.~~ | ~~2~~        |
-| Login Backend               | Login-Endpunkt implementieren und Passwort mit Hash vergleichen. JWT-Token zurückgeben.                         | 2        |
+| ~~Login Backend~~               | ~~Login-Endpunkt implementieren und Passwort mit Hash vergleichen. JWT-Token zurückgeben.~~                         | ~~2~~        |
 | Listing Entity & Repository | Java Entity für Inserate erstellen mit allen Feldern. JPA Repository und Service einrichten.                    | 1        |
 | Listing CRUD Backend        | Endpunkte für erstellen, abrufen und löschen von Inseraten. Nur eingeloggte User dürfen inserieren.             | 2        |
 | Bild-Upload Backend         | Multipart Endpunkt für Bild-Upload implementieren. Datei lokal speichern und Pfad in DB speichern.              | 2        |
@@ -30,7 +30,7 @@
 | Datum      | Zeit (h)                                                                                      | Was wurde erledigt                                                                                                                                                                                                                                                |
 |------------|-----------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | 08.06.2026 | 13:55-14:30<br/>14:30-15:00<br/> 15:00-15:30<br/>15:30-16:30<br/> 16:30-17:00<br/>17:00-17:35 | Einführung in den Unterricht und Videos schauen.<br/>Ich habe meine Projektplanung im README.md festgelegt<br/> Pause <br/>Ich habe mein Projekt aufgesetzt<br/> ich habe meine datenbank aufsetzen.<br/> Angefangen meine Java user entity klassen zu erstellen. |
-| 10.06.2026 | 19:00-21:00                                                                                   | Angefangen meine Register Points zu implementieren                                                                                                                                                                                                                |
+| 10.06.2026 | 19:00-21:00<br/>21:00-23:00                                                                   | Angefangen meine Register Points zu implementieren<br/>Ich habe den Login Endpunkt implementiert                                                                                                                                                                  |
 
 ----------------------------------------------------------------------------------------------------------------
 # Projektplanung
@@ -233,3 +233,19 @@ Connection conn = DatabaseConnection.getConnection();
 - **Salt** wird zufälig pro User generiert und in der DB gespeichert 
 - **Pepper** ist ein geheimer Schlüssel der nur in der '.env' Datei steht
 - **bcrypt** ist der Hashing-Algorithmus
+
+# Login Endpunkt 
+<p> Wenn sich ein User einloggt, wird das eingegebene Passwort mit dem gespeicherten Hash verglichen.
+Wenn das gelingt wird ein JWt Token zurückgegeben, dieser wird für weitere Anfragen verwendet.</p>
+
+## Ablauf 
+1. User gibt Username und Passwort ein 
+2. User wird anhand vom Username aus der Datenbank geholt 
+3. Passwort wird mit Salt und Pepper kombiniert und mit bcrypt verglichen 
+4. Wenn das geht wird ein JWT Token generiert und zurückgegeben
+5. Wenn das nicht funktioniert wird ein 401 Fehler zurückgegeben
+
+## Sicherheit 
+- **JWT-Token** ist 24h gültig 
+- **JWT-Secret** steht nur in der '.env' Datei 
+- Das Originalpasswort wird nie gespeichert oder verglichen
