@@ -68,6 +68,20 @@ public class ListingRepository {
         return null;
     }
 
+    public void update(Listing listing) throws SQLException {
+        String sql = "UPDATE listings SET name=?, zustand=?, groesse=?, preis=?, beschreibung=? WHERE id=?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, listing.getName());
+            stmt.setString(2, listing.getZustand());
+            stmt.setString(3, listing.getGroesse());
+            stmt.setDouble(4, listing.getPreis());
+            stmt.setString(5, listing.getBeschreibung());
+            stmt.setInt(6, listing.getId());
+            stmt.executeUpdate();
+        }
+    }
+
     public void delete(int id) throws SQLException {
         String sql = "DELETE FROM listings WHERE id = ?";
         try (Connection conn = DatabaseConnection.getConnection();
