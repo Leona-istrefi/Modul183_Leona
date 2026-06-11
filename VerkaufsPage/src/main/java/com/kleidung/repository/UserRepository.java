@@ -34,7 +34,8 @@ public class UserRepository {
                         rs.getString("username"),
                         rs.getString("email"),
                         rs.getString("salt"),
-                        rs.getString("password_hash")
+                        rs.getString("password_hash"),
+                        rs.getString("role")
                 );
             }
         }
