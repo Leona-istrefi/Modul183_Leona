@@ -12,7 +12,7 @@
 | ~~User Entity & Repository~~    | ~~Java Entity-Klassen für den User erstellen. JDBC Repository einrichten.~~                                       | ~~1~~        |
 | ~~Registrierung Backend~~       | ~~Register-Endpunkt implementieren mit Salt generieren und bcrypt Hashing. Benutzername und Hash in DB speichern.~~ | ~~2~~        |
 | ~~Login Backend~~               | ~~Login-Endpunkt implementieren und Passwort mit Hash vergleichen. JWT-Token zurückgeben.~~                         | ~~2~~        |
-| Listing Entity & Repository | Java Entity für Inserate erstellen mit allen Feldern. JPA Repository und Service einrichten.                    | 1        |
+| ~~Listing Entity & Repository~~ | ~~Java Entity für Inserate erstellen mit allen Feldern. JPA Repository und Service einrichten.~~                    | ~~1~~        |
 | Listing CRUD Backend        | Endpunkte für erstellen, abrufen und löschen von Inseraten. Nur eingeloggte User dürfen inserieren.             | 2        |
 | Bild-Upload Backend         | Multipart Endpunkt für Bild-Upload implementieren. Datei lokal speichern und Pfad in DB speichern.              | 2        |
 | API testen                  | Alle Endpunkte mit Postman testen. Fehler beheben.                                                              | 1        |
@@ -31,6 +31,7 @@
 |------------|-----------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | 08.06.2026 | 13:55-14:30<br/>14:30-15:00<br/> 15:00-15:30<br/>15:30-16:30<br/> 16:30-17:00<br/>17:00-17:35 | Einführung in den Unterricht und Videos schauen.<br/>Ich habe meine Projektplanung im README.md festgelegt<br/> Pause <br/>Ich habe mein Projekt aufgesetzt<br/> ich habe meine datenbank aufsetzen.<br/> Angefangen meine Java user entity klassen zu erstellen. |
 | 10.06.2026 | 19:00-21:00<br/>21:00-23:00                                                                   | Angefangen meine Register Points zu implementieren<br/>Ich habe den Login Endpunkt implementiert                                                                                                                                                                  |
+| 11.06.2026 | 19:00-21:10                                                                                   | Ich habe angefangen an den Inseraten zu arbeiten und die Felder zu erstellen.                                                                                                                                                                                     |
 
 ----------------------------------------------------------------------------------------------------------------
 # Projektplanung
@@ -69,6 +70,8 @@
 
 ## Sicherheit 
 <p> Passwörter werden mit einem zufälligen Salt und einem geheimen Pepper kombiniert und dann mit bcrypt gehasht. In der Datenbank wird nur der Hash und der Salt gespeichert, nie das Originalpasswort.</p>
+
+----------------------------------------------------------------------------------------------------------------
 
 # Projekt aufsetzen 
 
@@ -145,6 +148,8 @@ VerkaufsPage/
 | feature/image-uploads | bild upload
 | feature/frontend      | Alle react Seiten 
 
+----------------------------------------------------------------------------------------------------------------
+
 # Datenbank aufsetzen
 ## PostgreSQL installieren
 1. ich ging auf https://www.postgresql.org/download/ und wählte windows aus
@@ -200,6 +205,9 @@ CREATE TABLE images (
     filepath VARCHAR(255) NOT NULL
 );
 ```
+
+----------------------------------------------------------------------------------------------------------------
+
 # User Entitiy klassen erstellen
 ## Datenbankverbindung
 
@@ -218,6 +226,8 @@ Connection conn = DatabaseConnection.getConnection();
 ```
 
 > **Wichtig:** Das Datenbankpasswort wird in einer `.env` Datei gespeichert und nie direkt im Code geschrieben. Die `.env` Datei ist in der `.gitignore` eingetragen und wird nicht auf GitHub gepusht.
+
+----------------------------------------------------------------------------------------------------------------
  
 # Registrierung im Backend 
 <p> Wenn sich ein User registriert, wird sein Passwort sicher gespeichert. Dafür wird ein zufälliger Salt generiert und zusammen mit einem geheimen Pepper mit bcrypt gehasht.</p>
@@ -234,6 +244,8 @@ Connection conn = DatabaseConnection.getConnection();
 - **Pepper** ist ein geheimer Schlüssel der nur in der '.env' Datei steht
 - **bcrypt** ist der Hashing-Algorithmus
 
+----------------------------------------------------------------------------------------------------------------
+
 # Login Endpunkt 
 <p> Wenn sich ein User einloggt, wird das eingegebene Passwort mit dem gespeicherten Hash verglichen.
 Wenn das gelingt wird ein JWt Token zurückgegeben, dieser wird für weitere Anfragen verwendet.</p>
@@ -249,3 +261,21 @@ Wenn das gelingt wird ein JWt Token zurückgegeben, dieser wird für weitere Anf
 - **JWT-Token** ist 24h gültig 
 - **JWT-Secret** steht nur in der '.env' Datei 
 - Das Originalpasswort wird nie gespeichert oder verglichen
+
+----------------------------------------------------------------------------------------------------------------
+
+# Listing Entity und Repository
+<p> Ein Inserat enthält alle Informationen zu einem Kleidungsstück, welches zu verkauf bereit ist. Alle Daten der Inserate werden in der Datenbank gespeichert</p>
+
+## Felder 
+- **Name:** Name des Kleidungsstück
+- **Zustand:** Zustand vom Kleidungsstück (Gut, Schlecht, leicht beschädigt etc.)
+- **Grösse:** Grösse vom Kleidungsstück (S, M, L)
+- **Preis:** Preis in CHF
+- **Beschreibung:** Zusätziche beschreibung z.b. es ist von den 2000
+
+## Repository Methoden 
+- 'save()' - Inserat in der Datenbank speichern 
+- 'findAll()'- Alle Inserate anzeigen lassen 
+- 'findById()' - Spezifisches Inserat suchen 
+- 'delete()' - Ein Inserat löschen
