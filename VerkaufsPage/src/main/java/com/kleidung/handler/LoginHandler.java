@@ -15,19 +15,23 @@ public class LoginHandler implements HttpHandler {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-        if (!exchange.getRequestMethod().equals("POST")) {
-            exchange.sendResponseHeaders(405, -1);
-            return;
-        }
-
-        InputStream is = exchange.getRequestBody();
-        String body = new String(is.readAllBytes());
-
-        String username = extractParam(body, "username");
-        String password = extractParam(body, "password");
-
         try {
+            if (!exchange.getRequestMethod().equals("POST")) {
+                exchange.sendResponseHeaders(405, -1);
+                return;
+            }
+
+            InputStream is = exchange.getRequestBody();
+            String body = new String(is.readAllBytes());
+            System.out.println("Login Body: " + body);
+
+            String username = extractParam(body, "username");
+            String password = extractParam(body, "password");
+            System.out.println("Username: " + username);
+            System.out.println("Password: " + password);
+
             String token = authService.login(username, password);
+            System.out.println("Token erhalten: " + token);
             if (token == null) {
                 String response = "Falscher Username oder Passwort";
                 exchange.sendResponseHeaders(401, response.length());
@@ -42,7 +46,9 @@ public class LoginHandler implements HttpHandler {
                 os.write(response.getBytes());
                 os.close();
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
+            System.out.println("Fehler: " + e.getMessage());
+            e.printStackTrace();
             String response = "Fehler: " + e.getMessage();
             exchange.sendResponseHeaders(500, response.length());
             OutputStream os = exchange.getResponseBody();
@@ -54,8 +60,24 @@ public class LoginHandler implements HttpHandler {
     private String extractParam(String body, String key) {
         for (String param : body.split("&")) {
             String[] pair = param.split("=");
-            if (pair[0].equals(key)) return pair[1];
+            if (pair.length == 2) {
+                try {
+                    String decodedKey = java.net.URLDecoder.decode(pair[0], "UTF-8").trim();
+                    String decodedValue = java.net.URLDecoder.decode(pair[1], "UTF-8").trim();
+                    if (decodedKey.equals(key)) return decodedValue;
+                } catch (Exception e) {
+                    return "";
+                }
+            }
         }
         return "";
+    }
+
+    private void sendResponse(HttpExchange exchange, int code, String message) throws IOException {
+        byte[] bytes = message.getBytes("UTF-8");
+        exchange.sendResponseHeaders(code, bytes.length);
+        OutputStream os = exchange.getResponseBody();
+        os.write(bytes);
+        os.close();
     }
 }

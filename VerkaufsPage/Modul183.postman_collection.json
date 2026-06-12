@@ -1,0 +1,393 @@
+{
+  "info": {
+    "_postman_id": "55e1e33d-b4c7-4665-b4eb-6bfc6863f7c5",
+    "name": "Modul183",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "51253397",
+    "_collection_link": "https://go.postman.co/collection/51253397-55e1e33d-b4c7-4665-b4eb-6bfc6863f7c5?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Registrierung testen",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "username ",
+              "value": "testuser",
+              "type": "text",
+              "uuid": "42acd456-7343-4d8e-b4e0-3fce9589e8f8"
+            },
+            {
+              "key": "email ",
+              "value": "test@test.ch",
+              "type": "text",
+              "uuid": "7ff8ccfa-bfca-44fb-a8f2-6150e1de52b1"
+            },
+            {
+              "key": "password ",
+              "value": "test1234",
+              "type": "text",
+              "uuid": "41457b5a-0351-4f57-98e1-e8fb04c402af"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:8080/register",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login Testen",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "username ",
+              "value": "testuser",
+              "type": "text",
+              "uuid": "8ce3e1e2-77c5-4b51-a83f-3b8441929390"
+            },
+            {
+              "key": "password ",
+              "value": "test1234",
+              "type": "text",
+              "uuid": "323912f5-e2cb-449a-9a6d-7a3181ccb7aa"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:8080/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Inserat erstellen testen",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{supabase_service_role_api_key_116j}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "",
+            "value": "",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "name",
+              "type": "text",
+              "uuid": "7361b15c-0d92-4585-a9a7-86e476e4829e",
+              "value": "Jacke"
+            },
+            {
+              "key": "zustand",
+              "type": "text",
+              "uuid": "5d93b31e-efe5-49e5-82e2-fa8ed7477bef",
+              "value": "Gut"
+            },
+            {
+              "key": "groesse",
+              "type": "text",
+              "uuid": "1a9988f8-4794-4293-a6e9-cae6ee00921a",
+              "value": "M"
+            },
+            {
+              "key": "preis",
+              "type": "text",
+              "uuid": "b6d4209c-44c3-4d6e-aa64-d02d184498ec",
+              "value": "25.00"
+            },
+            {
+              "key": "beschreibung",
+              "type": "text",
+              "uuid": "542cbf84-ca3a-4e9c-b4b9-6bfd9f62fd6d",
+              "value": "Coole Winterjacke"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:8080/listings",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "listings"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Alle Inserate abrufen testen",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{supabase_service_role_api_key_116j}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "",
+            "value": "",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "name",
+              "type": "text",
+              "uuid": "7361b15c-0d92-4585-a9a7-86e476e4829e",
+              "value": "Jacke"
+            },
+            {
+              "key": "zustand",
+              "type": "text",
+              "uuid": "5d93b31e-efe5-49e5-82e2-fa8ed7477bef",
+              "value": "Gut"
+            },
+            {
+              "key": "groesse",
+              "type": "text",
+              "uuid": "1a9988f8-4794-4293-a6e9-cae6ee00921a",
+              "value": "M"
+            },
+            {
+              "key": "preis",
+              "type": "text",
+              "uuid": "b6d4209c-44c3-4d6e-aa64-d02d184498ec",
+              "value": "25.00"
+            },
+            {
+              "key": "beschreibung",
+              "type": "text",
+              "uuid": "542cbf84-ca3a-4e9c-b4b9-6bfd9f62fd6d",
+              "value": "Coole Winterjacke"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:8080/listings",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "listings"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Inserat bearbeiten testen",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{supabase_service_role_api_key_116j}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "",
+            "value": "",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "name",
+              "type": "text",
+              "uuid": "7361b15c-0d92-4585-a9a7-86e476e4829e",
+              "value": "Winterjacke"
+            },
+            {
+              "key": "zustand",
+              "type": "text",
+              "uuid": "5d93b31e-efe5-49e5-82e2-fa8ed7477bef",
+              "value": "Neu"
+            },
+            {
+              "key": "groesse",
+              "type": "text",
+              "uuid": "1a9988f8-4794-4293-a6e9-cae6ee00921a",
+              "value": "M"
+            },
+            {
+              "key": "preis",
+              "type": "text",
+              "uuid": "b6d4209c-44c3-4d6e-aa64-d02d184498ec",
+              "value": "30.00"
+            },
+            {
+              "key": "beschreibung",
+              "type": "text",
+              "uuid": "542cbf84-ca3a-4e9c-b4b9-6bfd9f62fd6d",
+              "value": "Sehr Coole Winterjacke"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:8080/listings/4",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "listings",
+            "4"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Bild hochladen testen",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{supabase_service_role_api_key_116j}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{json_web_token_116j}}",
+            "type": "text"
+          },
+          {
+            "key": "X-Filename",
+            "value": "sehr coole winterjacke men.jpg",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "file",
+          "file": {
+            "src": "/C:/Users/istre/Downloads/sehr coole winterjacke men.jpg"
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/image/4",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "image",
+            "4"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Inserat löschen test",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{supabase_service_role_api_key_116j}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/listings/4",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "listings",
+            "4"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "supabase_service_role_api_key_116j",
+      "secret": true
+    },
+    {
+      "key": "json_web_token_116j",
+      "secret": true
+    },
+    {
+      "key": "bearer_token_12za",
+      "secret": true
+    }
+  ]
+}

@@ -15,7 +15,7 @@
 | ~~Listing Entity & Repository~~ | ~~Java Entity für Inserate erstellen mit allen Feldern. JPA Repository und Service einrichten.~~                   | ~~1~~        |
 | ~~Listing CRUD Backend~~        | ~~Endpunkte für erstellen, abrufen und löschen von Inseraten. Nur eingeloggte User dürfen inserieren.~~              | ~~2~~        |
 | ~~Bild-Upload Backend~~         | ~~Multipart Endpunkt für Bild-Upload implementieren. Datei lokal speichern und Pfad in DB speichern.~~                 | ~~2~~        |
-| API testen                  | Alle Endpunkte mit Postman testen. Fehler beheben.                                                                 | 1        |
+| ~~API testen~~                  | ~~Alle Endpunkte mit Postman testen. Fehler beheben.~~                                                                 | ~~1~~        |
 | Login & Register Frontend   | Loginseite und Registrierungsseite in React bauen. Formular mit API verbinden.                                     | 2        |
 | Navbar implementieren       | Einfache Navigation mit Links erstellen. Eingeloggten User anzeigen.                                               | 1        |
 | Cards im Frontend           | Post-Cards auf der Startseite implementieren. Bild, Name und Preis anzeigen.                                       | 1.5      |
@@ -27,12 +27,12 @@
 | **Total**                   |                                                                                                                    | **25 h** |
 
 ## Arbeitsjournal 
-| Datum      | Zeit (h)                                                                                      | Was wurde erledigt                                                                                                                                                                                                                                               |
-|------------|-----------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Datum      | Zeit (h)                                                                                      | Was wurde erledigt                                                                                                                                                                                                                                                |
+|------------|-----------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | 08.06.2026 | 13:55-14:30<br/>14:30-15:00<br/> 15:00-15:30<br/>15:30-16:30<br/> 16:30-17:00<br/>17:00-17:35 | Einführung in den Unterricht und Videos schauen.<br/>Ich habe meine Projektplanung im README.md festgelegt<br/> Pause <br/>Ich habe mein Projekt aufgesetzt<br/> ich habe meine datenbank aufsetzen.<br/> Angefangen meine Java user entity klassen zu erstellen. |
-| 10.06.2026 | 19:00-21:00<br/>21:00-23:00                                                                   | Angefangen meine Register Points zu implementieren<br/>Ich habe den Login Endpunkt implementiert                                                                                                                                                                 |
-| 11.06.2026 | 19:00-21:10<br/>21:10-22:30                                                                   | Ich habe angefangen an den Inseraten zu arbeiten und die Felder zu erstellen.<br/> Ich habe anefangen alle Endpunke für die CRUD Operatoren zu schreiben.                                                                                                        |
-| 12.06.2026 | 17:00-19:15                                                                                   | Ich habe angefangen an dem Bild-upload zu arbeiten.                                                                                                                                                                                                              |
+| 10.06.2026 | 19:00-21:00<br/>21:00-23:00                                                                   | Angefangen meine Register Points zu implementieren<br/>Ich habe den Login Endpunkt implementiert                                                                                                                                                                  |
+| 11.06.2026 | 19:00-21:10<br/>21:10-22:30                                                                   | Ich habe angefangen an den Inseraten zu arbeiten und die Felder zu erstellen.<br/> Ich habe anefangen alle Endpunke für die CRUD Operatoren zu schreiben.                                                                                                         |
+| 12.06.2026 | 17:00-19:15<br/>19:20-21:45                                                                   | Ich habe angefangen an dem Bild-upload zu arbeiten.<br/>Ich habe angefangen meine API's zu testen und alle fehler zu beheben                                                                                                                                      |
 
 ----------------------------------------------------------------------------------------------------------------
 # Projektplanung
@@ -332,3 +332,62 @@ ALTER TABLE users ADD COLUMN role VARCHAR(20) DEFAULT 'user';
 - Ein dateiname wird generiert 
 - Datei wird lokal im 'uploads/' Ordner gespeichert 
 - Dateipfad wird in der Datenbank gespeichert 
+
+----------------------------------------------------------------------------------------------------------------
+
+# API's testen
+<p> Alle Endpunkte wurden mit Postman getestet und alle Fehler wurden behoben</p>
+
+## Getestete Endpunkte 
+- 'POST /register' - Registrierung 
+- 'POST /login' - eingeloggt und den JWT Token erhalten 
+- 'GET /listings' - Alle Inserate abgerufen
+- 'POST /listings' - Inserat erstellt 
+- 'PUT /listings/{id}' - Inserat bearbeitet
+- 'POST /image/{id}' - Bild hochladen
+- 'DELETE /listings/{id}' - Inserat löschen
+
+## Authentifizierung in postman 
+<p> Der JWT Token wurde vom Login kopiert und bei den geschützten Endpunkten im Header mitgeschickt</p>
+
+## Gefundene Fehler und die Fixes 
+**1. .env Datei nicht gefunden**
+<p> Der Server hat meine '.env' Datei nicht gefunden, weil das Working Directory falsch war. </p>
+
+**Fix**
+<p> Ich ging auf -> Run -> Edit Configuration -> Add new Configuration -> Application, Main. und danach dort alle Informationen eingegeben. </p>
+
+**2. URL Endcoded Parameter mit Leerzeichen**
+<p> Postman at die Keys mit '%20' am Ende geschickt (bsp: 'username%20=testuser'), weshalb die Parameter nicht gelesen wurden.
+
+**Fix**
+<p> In der 'extractParam' Mehode 'URLDecoder.decode()' und '.trim()' auf den Key angewendet</p>
+
+**3. JWT Token hängt den Server auf**
+<p> Die alte 'jjtw' version war nicht kompatibel mit Java 26 und hat den Server zum Absturz gebracht.</p>
+
+**Fix**
+<p> Die Dependency gewechselt und die API entsprechend angepasst</p>
+
+**4. Inserat löschen schlug fehl wegen dem Fremdschlüssel** 
+<p> Ein Inserat konnte nicht gelöscht werden, weil noch ein Bild in der 'images' Tabelle drauf war</p>
+
+**Fix** 
+<p> In der 'ListingRepository.delete()' werden alle Bilder vom Inserat gelöscht, danach das Inserat selbst.</p>
+
+**5. Image Hanlder wurde nicht aufgerufen**
+<p> Der Context '/listings' hat alle Anfragen abgefangen, auch '/listings/{id}/image'.</p>
+
+**Fix**
+<p> Den Image Endpunkt auf '/image/{id}' geändert und vor '/listings' registriert </p>
+
+**6. Too many bytes to write to stream**
+<p> Die Response Länge wurde mit 'message.length()' berechnet, was bei Sonderzeichen falsch war.</p>
+
+**Fix**
+<p> Überall 'message.getBytes("UFT-8")' verwendet und 'bytes.length' für die Header-Länge gesetzt.</p>
+
+## Postman Collection 
+<p> Die Pstman Collection mit allen Tests ist im Repository zu finden und kann direkt in Postman importiert werden.</p>
+
+----------------------------------------------------------------------------------------------------------------

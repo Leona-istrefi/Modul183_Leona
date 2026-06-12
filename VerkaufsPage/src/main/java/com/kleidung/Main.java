@@ -14,8 +14,8 @@ public class Main {
         HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
         server.createContext("/register", new RegisterHandler());
         server.createContext("/login", new LoginHandler());
+        server.createContext("/image", new ImageHandler());
         server.createContext("/listings", new ListingHandler());
-        server.createContext("/listings/image", new ImageHandler());
         server.start();
         System.out.println("Server läuft auf Port 8080");
     }
