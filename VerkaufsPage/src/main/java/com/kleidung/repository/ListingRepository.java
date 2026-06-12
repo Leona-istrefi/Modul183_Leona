@@ -83,9 +83,16 @@ public class ListingRepository {
     }
 
     public void delete(int id) throws SQLException {
-        String sql = "DELETE FROM listings WHERE id = ?";
+        String deleteImages = "DELETE FROM images WHERE listing_id = ?";
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(deleteImages)) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        }
+
+        String deleteListing = "DELETE FROM listings WHERE id = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(deleteListing)) {
             stmt.setInt(1, id);
             stmt.executeUpdate();
         }

@@ -50,10 +50,11 @@ public class ListingHandler implements HttpHandler {
             }
             json.append("]");
             String response = json.toString();
+            byte[] bytes = response.getBytes("UTF-8");
             exchange.getResponseHeaders().set("Content-Type", "application/json");
-            exchange.sendResponseHeaders(200, response.length());
+            exchange.sendResponseHeaders(200, bytes.length);
             OutputStream os = exchange.getResponseBody();
-            os.write(response.getBytes());
+            os.write(bytes);
             os.close();
         } catch (SQLException e) {
             sendError(exchange, 500, "Fehler: " + e.getMessage());
@@ -127,6 +128,7 @@ public class ListingHandler implements HttpHandler {
         try {
             String[] parts = exchange.getRequestURI().getPath().split("/");
             int id = Integer.parseInt(parts[parts.length - 1]);
+            System.out.println("Delete ID: " + id);
 
             Listing existing = listingService.getById(id);
             if (existing == null) {
@@ -137,6 +139,7 @@ public class ListingHandler implements HttpHandler {
             String token = exchange.getRequestHeaders().getFirst("Authorization").substring(7);
             String role = JwtUtil.getRoleFromToken(token);
             int userId = userRepository.findByUsername(username).getId();
+            System.out.println("Role: " + role + " userId: " + userId + " existingUserId: " + existing.getUserId());
 
             if (!role.equals("admin") && existing.getUserId() != userId) {
                 sendError(exchange, 403, "Keine Berechtigung");
@@ -145,7 +148,9 @@ public class ListingHandler implements HttpHandler {
 
             listingService.delete(id);
             sendResponse(exchange, 200, "Inserat gelöscht");
-        } catch (SQLException e) {
+        } catch (Exception e) {
+            System.out.println("Delete Fehler: " + e.getMessage());
+            e.printStackTrace();
             sendError(exchange, 500, "Fehler: " + e.getMessage());
         }
     }
@@ -174,9 +179,10 @@ public class ListingHandler implements HttpHandler {
     }
 
     private void sendResponse(HttpExchange exchange, int code, String message) throws IOException {
-        exchange.sendResponseHeaders(code, message.length());
+        byte[] bytes = message.getBytes("UTF-8");
+        exchange.sendResponseHeaders(code, bytes.length);
         OutputStream os = exchange.getResponseBody();
-        os.write(message.getBytes());
+        os.write(bytes);
         os.close();
     }
 

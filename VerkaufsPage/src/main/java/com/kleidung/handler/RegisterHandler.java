@@ -22,7 +22,7 @@ public class RegisterHandler implements HttpHandler {
 
         InputStream is = exchange.getRequestBody();
         String body = new String(is.readAllBytes());
-
+        System.out.println("Body: " + body); // NEU
         String username = extractParam(body, "username");
         String email = extractParam(body, "email");
         String password = extractParam(body, "password");
@@ -46,8 +46,24 @@ public class RegisterHandler implements HttpHandler {
     private String extractParam(String body, String key) {
         for (String param : body.split("&")) {
             String[] pair = param.split("=");
-            if (pair[0].equals(key)) return pair[1];
+            if (pair.length == 2) {
+                try {
+                    String decodedKey = java.net.URLDecoder.decode(pair[0], "UTF-8").trim();
+                    String decodedValue = java.net.URLDecoder.decode(pair[1], "UTF-8").trim();
+                    if (decodedKey.equals(key)) return decodedValue;
+                } catch (Exception e) {
+                    return "";
+                }
+            }
         }
         return "";
+    }
+
+    private void sendResponse(HttpExchange exchange, int code, String message) throws IOException {
+        byte[] bytes = message.getBytes("UTF-8");
+        exchange.sendResponseHeaders(code, bytes.length);
+        OutputStream os = exchange.getResponseBody();
+        os.write(bytes);
+        os.close();
     }
 }
