@@ -14,7 +14,7 @@
 | ~~Login Backend~~               | ~~Login-Endpunkt implementieren und Passwort mit Hash vergleichen. JWT-Token zurückgeben.~~                        | ~~2~~        |
 | ~~Listing Entity & Repository~~ | ~~Java Entity für Inserate erstellen mit allen Feldern. JPA Repository und Service einrichten.~~                   | ~~1~~        |
 | ~~Listing CRUD Backend~~        | ~~Endpunkte für erstellen, abrufen und löschen von Inseraten. Nur eingeloggte User dürfen inserieren.~~              | ~~2~~        |
-| Bild-Upload Backend         | Multipart Endpunkt für Bild-Upload implementieren. Datei lokal speichern und Pfad in DB speichern.                 | 2        |
+| ~~Bild-Upload Backend~~         | ~~Multipart Endpunkt für Bild-Upload implementieren. Datei lokal speichern und Pfad in DB speichern.~~                 | ~~2~~        |
 | API testen                  | Alle Endpunkte mit Postman testen. Fehler beheben.                                                                 | 1        |
 | Login & Register Frontend   | Loginseite und Registrierungsseite in React bauen. Formular mit API verbinden.                                     | 2        |
 | Navbar implementieren       | Einfache Navigation mit Links erstellen. Eingeloggten User anzeigen.                                               | 1        |
@@ -27,11 +27,12 @@
 | **Total**                   |                                                                                                                    | **25 h** |
 
 ## Arbeitsjournal 
-| Datum      | Zeit (h)                                                                                      | Was wurde erledigt                                                                                                                                                                                                                                                |
-|------------|-----------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Datum      | Zeit (h)                                                                                      | Was wurde erledigt                                                                                                                                                                                                                                               |
+|------------|-----------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | 08.06.2026 | 13:55-14:30<br/>14:30-15:00<br/> 15:00-15:30<br/>15:30-16:30<br/> 16:30-17:00<br/>17:00-17:35 | Einführung in den Unterricht und Videos schauen.<br/>Ich habe meine Projektplanung im README.md festgelegt<br/> Pause <br/>Ich habe mein Projekt aufgesetzt<br/> ich habe meine datenbank aufsetzen.<br/> Angefangen meine Java user entity klassen zu erstellen. |
-| 10.06.2026 | 19:00-21:00<br/>21:00-23:00                                                                   | Angefangen meine Register Points zu implementieren<br/>Ich habe den Login Endpunkt implementiert                                                                                                                                                                  |
-| 11.06.2026 | 19:00-21:10<br/>21:10-22:30                                                                   | Ich habe angefangen an den Inseraten zu arbeiten und die Felder zu erstellen.<br/> Ich habe anefangen alle Endpunke für die CRUD Operatoren zu schreiben.                                                                                                         |
+| 10.06.2026 | 19:00-21:00<br/>21:00-23:00                                                                   | Angefangen meine Register Points zu implementieren<br/>Ich habe den Login Endpunkt implementiert                                                                                                                                                                 |
+| 11.06.2026 | 19:00-21:10<br/>21:10-22:30                                                                   | Ich habe angefangen an den Inseraten zu arbeiten und die Felder zu erstellen.<br/> Ich habe anefangen alle Endpunke für die CRUD Operatoren zu schreiben.                                                                                                        |
+| 12.06.2026 | 17:00-19:15                                                                                   | Ich habe angefangen an dem Bild-upload zu arbeiten.                                                                                                                                                                                                              |
 
 ----------------------------------------------------------------------------------------------------------------
 # Projektplanung
@@ -317,4 +318,17 @@ ALTER TABLE users ADD COLUMN role VARCHAR(20) DEFAULT 'user';
 - '401' - Nicht eingeloggt oder ungültiger Token 
 - '403' - Keine Berechtigung 
 - '404' - Das Inserat wurde nciht gefunden  
-- '505' - Fehler in der Datenbank 
+- '505' - Fehler in der Datenbank/beim Speichern 
+
+----------------------------------------------------------------------------------------------------------------
+# Bild upload 
+<p> Bilder können pro Inserat hochgeladen werden. Die Datei wird lokal auf dem Server gespeichert</p>
+
+## Endpunkt 
+- 'POST/listings/{id}/image' - Bild für ein Inserat hochladen
+
+## Ablauf 
+- Bild wird als Datei im Request Body mitgeschickt 
+- Ein dateiname wird generiert 
+- Datei wird lokal im 'uploads/' Ordner gespeichert 
+- Dateipfad wird in der Datenbank gespeichert 

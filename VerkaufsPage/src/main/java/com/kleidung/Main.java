@@ -1,5 +1,6 @@
 package com.kleidung;
 
+import com.kleidung.handler.ImageHandler;
 import com.kleidung.handler.ListingHandler;
 import com.kleidung.handler.LoginHandler;
 import com.kleidung.handler.RegisterHandler;
@@ -14,6 +15,7 @@ public class Main {
         server.createContext("/register", new RegisterHandler());
         server.createContext("/login", new LoginHandler());
         server.createContext("/listings", new ListingHandler());
+        server.createContext("/listings/image", new ImageHandler());
         server.start();
         System.out.println("Server läuft auf Port 8080");
     }
