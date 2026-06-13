@@ -6,17 +6,17 @@
 ## Zeitplan 
 | Name                        | Beschreibung                                                                                                       | Zeit (h) |
 |-----------------------------|--------------------------------------------------------------------------------------------------------------------|----------|
-| ~~Projektplanung~~            | ~~Architektur planen und Technologien festlegen. Datenbankstruktur skizzieren.~~                                   | ~~0.5~~    |
-| ~~Projekt aufsetzen~~           | ~~Spring Boot und React Projekt erstellen. Ordnerstruktur und Dependencies einrichten.~~                           | ~~1~~      |
-| ~~Datenbank aufsetzen~~         | ~~PostgreSQL installieren und konfigurieren. Tabellen für users, listings und images erstellen.~~                  | ~~1.5~~      |
-| ~~User Entity & Repository~~    | ~~Java Entity-Klassen für den User erstellen. JDBC Repository einrichten.~~                                        | ~~1~~        |
-| ~~Registrierung Backend~~       | ~~Register-Endpunkt implementieren mit Salt generieren und bcrypt Hashing. Benutzername und Hash in DB speichern.~~ | ~~2~~        |
-| ~~Login Backend~~               | ~~Login-Endpunkt implementieren und Passwort mit Hash vergleichen. JWT-Token zurückgeben.~~                        | ~~2~~        |
-| ~~Listing Entity & Repository~~ | ~~Java Entity für Inserate erstellen mit allen Feldern. JPA Repository und Service einrichten.~~                   | ~~1~~        |
-| ~~Listing CRUD Backend~~        | ~~Endpunkte für erstellen, abrufen und löschen von Inseraten. Nur eingeloggte User dürfen inserieren.~~              | ~~2~~        |
-| ~~Bild-Upload Backend~~         | ~~Multipart Endpunkt für Bild-Upload implementieren. Datei lokal speichern und Pfad in DB speichern.~~                 | ~~2~~        |
-| ~~API testen~~                  | ~~Alle Endpunkte mit Postman testen. Fehler beheben.~~                                                                 | ~~1~~        |
-| Login & Register Frontend   | Loginseite und Registrierungsseite in React bauen. Formular mit API verbinden.                                     | 2        |
+| ~~Projektplanung~~            | ~~Architektur planen und Technologien festlegen. Datenbankstruktur skizzieren.~~                                   | ~~0.5~~  |
+| ~~Projekt aufsetzen~~           | ~~Spring Boot und React Projekt erstellen. Ordnerstruktur und Dependencies einrichten.~~                           | ~~1~~    |
+| ~~Datenbank aufsetzen~~         | ~~PostgreSQL installieren und konfigurieren. Tabellen für users, listings und images erstellen.~~                  | ~~1.5~~    |
+| ~~User Entity & Repository~~    | ~~Java Entity-Klassen für den User erstellen. JDBC Repository einrichten.~~                                        | ~~1~~      |
+| ~~Registrierung Backend~~       | ~~Register-Endpunkt implementieren mit Salt generieren und bcrypt Hashing. Benutzername und Hash in DB speichern.~~ | ~~2~~      |
+| ~~Login Backend~~               | ~~Login-Endpunkt implementieren und Passwort mit Hash vergleichen. JWT-Token zurückgeben.~~                        | ~~2~~      |
+| ~~Listing Entity & Repository~~ | ~~Java Entity für Inserate erstellen mit allen Feldern. JPA Repository und Service einrichten.~~                   | ~~1~~      |
+| ~~Listing CRUD Backend~~        | ~~Endpunkte für erstellen, abrufen und löschen von Inseraten. Nur eingeloggte User dürfen inserieren.~~              | ~~2~~      |
+| ~~Bild-Upload Backend~~         | ~~Multipart Endpunkt für Bild-Upload implementieren. Datei lokal speichern und Pfad in DB speichern.~~                 | ~~2~~      |
+| ~~API testen~~                  | ~~Alle Endpunkte mit Postman testen. Fehler beheben.~~                                                                 | ~~1~~      |
+| ~~Login & Register Frontend~~   | ~~Loginseite und Registrierungsseite in React bauen. Formular mit API verbinden.~~                                     | ~~2~~        |
 | Navbar implementieren       | Einfache Navigation mit Links erstellen. Eingeloggten User anzeigen.                                               | 1        |
 | Cards im Frontend           | Post-Cards auf der Startseite implementieren. Bild, Name und Preis anzeigen.                                       | 1.5      |
 | Post erstellen Frontend     | Formular für neue Poosts bauen. Alle Felder und Bild-Upload einbinden.                                             | 2        |
@@ -33,6 +33,7 @@
 | 10.06.2026 | 19:00-21:00<br/>21:00-23:00                                                                   | Angefangen meine Register Points zu implementieren<br/>Ich habe den Login Endpunkt implementiert                                                                                                                                                                  |
 | 11.06.2026 | 19:00-21:10<br/>21:10-22:30                                                                   | Ich habe angefangen an den Inseraten zu arbeiten und die Felder zu erstellen.<br/> Ich habe anefangen alle Endpunke für die CRUD Operatoren zu schreiben.                                                                                                         |
 | 12.06.2026 | 17:00-19:15<br/>19:20-21:45                                                                   | Ich habe angefangen an dem Bild-upload zu arbeiten.<br/>Ich habe angefangen meine API's zu testen und alle fehler zu beheben                                                                                                                                      |
+| 13.06.2026 | 17:00-18:30                                                                                   | Ich habe angefangen die Registrierung und das Login in meinem Frontend zu implementieren.                                                                                                                                                                         |
 
 ----------------------------------------------------------------------------------------------------------------
 # Projektplanung
@@ -388,6 +389,47 @@ ALTER TABLE users ADD COLUMN role VARCHAR(20) DEFAULT 'user';
 <p> Überall 'message.getBytes("UFT-8")' verwendet und 'bytes.length' für die Header-Länge gesetzt.</p>
 
 ## Postman Collection 
-<p> Die Pstman Collection mit allen Tests ist im Repository zu finden und kann direkt in Postman importiert werden.</p>
+<p> Die Postman Collection mit allen Tests ist im Repository zu finden und kann direkt in Postman importiert werden.</p>
+
+----------------------------------------------------------------------------------------------------------------
+
+# Login und Registrierung im Frontend
+<p> Ich habe das Login und die Registrierung in React mit Typescript gebaut. Alle Forms sind mit dem Backend verbunden und auch responsive gestyled</p>
+
+## Atomic Design 
+<p> Ich habe mein Frontend mit dem Atomic Design prinzip gebaut:</p>
+
+- **Atoms** - kleinste UI Elemente wie 'Button', 'Input' und 'ErrorMessage'
+- **Molecules** - kombination von Atoms wie 'Login- /RegisterForm'
+- **Pages** - die Seiten welche alle Molecules zusammensetzen 
+
+## Styling 
+- 'global.css' - Globales Styling für den ganzen Body 
+- 'atoms.css' - Styling für alle Atoms 
+- 'molecules.css' Styling für alle Molecules 
+
+## Responsiv 
+<p> Ich habe die Seiten so gestyled, dass sie sich automatisch an die verschiedenen Bildschirmgrössen anpassen.</p>
+
+## Seiten
+- '/login' - Loginseite mit dem Username und Passwort
+- '/register' - Registrierungsseite wo man sich registrieren kann 
+- '/listings' - Hier werden später alle Inserate angezeigt, im moment steht dort nut "Willkommen!" als Platzhalter.
+
+## Ablauf Login 
+1. User gibt Username und Passwort ein 
+2. Anfrage wird an 'POST /login' geschickt 
+3. JWT-Token wird im 'localStorage' gespeichert 
+4. User wird auf '/listings' weitergeleitet 
+
+## Ablauf REgistrierung 
+1. User gibt Username, Email und Passwort ein 
+2. Anfrage wird an 'POST /register' geschickt 
+3. Bei Erfolg wird eine SuccessMEssage angezeigt 
+4. User kann sich dann einloggen
+
+## Gefundene Fehler 
+**CORS Fehler:** Der Browser hat Anfragen von 'localhost:3000' zu 'localhost:8080' blockiert 
+**Fix:** 'CoursUtil.java' erstellt und in allen Handlers eingebaut
 
 ----------------------------------------------------------------------------------------------------------------

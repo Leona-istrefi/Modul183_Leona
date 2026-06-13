@@ -3,6 +3,7 @@ package com.kleidung.handler;
 import com.kleidung.model.Listing;
 import com.kleidung.repository.UserRepository;
 import com.kleidung.service.ListingService;
+import com.kleidung.util.CorsUtil;
 import com.kleidung.util.JwtUtil;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -21,6 +22,8 @@ public class ListingHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         String method = exchange.getRequestMethod();
+        CorsUtil.addCorsHeaders(exchange);
+        if (CorsUtil.handleOptions(exchange)) return;
 
         switch (method) {
             case "GET" -> handleGet(exchange);
