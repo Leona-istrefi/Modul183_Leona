@@ -4,6 +4,7 @@ import com.kleidung.service.ImageService;
 import com.kleidung.util.JwtUtil;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import com.kleidung.util.CorsUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,6 +19,9 @@ public class ImageHandler implements HttpHandler {
     public void handle(HttpExchange exchange) throws IOException {
         try {
             System.out.println("ImageHandler aufgerufen");
+            CorsUtil.addCorsHeaders(exchange);
+            if (CorsUtil.handleOptions(exchange)) return;
+
             if (!exchange.getRequestMethod().equals("POST")) {
                 exchange.sendResponseHeaders(405, -1);
                 return;

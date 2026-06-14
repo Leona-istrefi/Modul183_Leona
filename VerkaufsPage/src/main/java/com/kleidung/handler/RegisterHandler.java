@@ -1,6 +1,7 @@
 package com.kleidung.handler;
 
 import com.kleidung.service.AuthService;
+import com.kleidung.util.CorsUtil;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -15,6 +16,8 @@ public class RegisterHandler implements HttpHandler {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
+        CorsUtil.addCorsHeaders(exchange);
+        if (CorsUtil.handleOptions(exchange)) return;
         if (!exchange.getRequestMethod().equals("POST")) {
             exchange.sendResponseHeaders(405, -1);
             return;
