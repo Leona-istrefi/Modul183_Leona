@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Navbar from './molecules/Navbar';
 import Listings from "./pages/Listings";
+import Favorites from "./pages/Favorites";
 
 const AppContent = () => {
     const location = useLocation();
@@ -17,6 +18,7 @@ const AppContent = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/listings" element={<Listings />} />
+                <Route path="/favorites" element={<Favorites />} />
             </Routes>
         </>
     );

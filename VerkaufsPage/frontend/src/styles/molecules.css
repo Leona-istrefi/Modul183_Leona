@@ -254,6 +254,28 @@
     background-color: #357ABD;
 }
 
+.listing-card-heart {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1rem;
+    z-index: 1;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+}
+
+.listing-card-heart:hover {
+    transform: scale(1.1);
+}
+
 @media (max-width: 480px) {
     .listings-grid {
         grid-template-columns: 1fr 1fr;
