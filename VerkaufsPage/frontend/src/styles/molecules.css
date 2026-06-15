@@ -207,6 +207,53 @@
     margin-top: 1rem;
 }
 
+.listing-card {
+    position: relative;
+}
+
+.listing-card-badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background-color: #f39c12;
+    color: white;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.toggle-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+
+.fab-button {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: #4A90E2;
+    color: white;
+    border: none;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    z-index: 999;
+}
+
+.fab-button:hover {
+    background-color: #357ABD;
+}
+
 @media (max-width: 480px) {
     .listings-grid {
         grid-template-columns: 1fr 1fr;

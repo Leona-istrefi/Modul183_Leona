@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ListingCard from '../molecules/ListingCard';
 import ListingDetail from '../molecules/ListingDetail';
+import CreateListingModal from '../molecules/CreateListingModal';
 import '../styles/molecules.css';
 
 interface Listing {
@@ -12,12 +13,15 @@ interface Listing {
     groesse: string;
     preis: number;
     beschreibung: string;
+    isPublic: boolean;
 }
 
 const Listings = () => {
     const [listings, setListings] = useState<Listing[]>([]);
     const [images, setImages] = useState<{ [key: number]: string | null }>({});
     const [selected, setSelected] = useState<Listing | null>(null);
+    const [showCreate, setShowCreate] = useState(false);
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
         loadListings();
@@ -25,7 +29,9 @@ const Listings = () => {
 
     const loadListings = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/listings');
+            const response = await axios.get('http://localhost:8080/listings', {
+                headers: token ? { Authorization: `Bearer ${token}` } : {}
+            });
             const data: Listing[] = response.data;
             setListings(data);
 
@@ -65,10 +71,17 @@ const Listings = () => {
                         name={listing.name}
                         preis={listing.preis}
                         imageUrl={images[listing.id] || null}
+                        isPublic={listing.isPublic}
                         onClick={() => setSelected(listing)}
                     />
                 ))}
             </div>
+
+            {token && (
+                <button className="fab-button" onClick={() => setShowCreate(true)} title="Inserat erstellen">
+                    +
+                </button>
+            )}
 
             {selected && (
                 <ListingDetail
@@ -77,6 +90,13 @@ const Listings = () => {
                     onClose={() => setSelected(null)}
                     onDeleted={handleDeleted}
                     onUpdated={handleUpdated}
+                />
+            )}
+
+            {showCreate && (
+                <CreateListingModal
+                    onClose={() => setShowCreate(false)}
+                    onCreated={loadListings}
                 />
             )}
         </div>

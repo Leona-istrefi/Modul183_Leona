@@ -20,9 +20,12 @@ public class ListingHandler implements HttpHandler {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
+        System.out.println("ListingHandler aufgerufen: " + exchange.getRequestMethod());
         CorsUtil.addCorsHeaders(exchange);
-        if (CorsUtil.handleOptions(exchange)) return;
-
+        if (CorsUtil.handleOptions(exchange)) {
+            System.out.println("OPTIONS beantwortet");
+            return;
+        }
         String method = exchange.getRequestMethod();
 
         switch (method) {

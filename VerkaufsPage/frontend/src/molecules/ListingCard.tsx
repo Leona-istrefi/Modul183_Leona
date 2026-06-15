@@ -5,12 +5,14 @@ interface ListingCardProps {
     name: string;
     preis: number;
     imageUrl: string | null;
+    isPublic: boolean;
     onClick: () => void;
 }
 
-const ListingCard: React.FC<ListingCardProps> = ({ name, preis, imageUrl, onClick }) => {
+const ListingCard: React.FC<ListingCardProps> = ({ name, preis, imageUrl, isPublic, onClick }) => {
     return (
         <div className="listing-card" onClick={onClick}>
+            {!isPublic && <span className="listing-card-badge">Privat</span>}
             <div className="listing-card-image">
                 {imageUrl ? (
                     <img src={imageUrl} alt={name} />
