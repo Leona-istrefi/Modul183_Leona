@@ -17,8 +17,8 @@
 | ~~Bild-Upload Backend~~         | ~~Multipart Endpunkt für Bild-Upload implementieren. Datei lokal speichern und Pfad in DB speichern.~~                 | ~~2~~      |
 | ~~API testen~~                  | ~~Alle Endpunkte mit Postman testen. Fehler beheben.~~                                                                 | ~~1~~      |
 | ~~Login & Register Frontend~~   | ~~Loginseite und Registrierungsseite in React bauen. Formular mit API verbinden.~~                                     | ~~2~~        |
-| Navbar implementieren       | Einfache Navigation mit Links erstellen. Eingeloggten User anzeigen.                                               | 1        |
-| Cards im Frontend           | Post-Cards auf der Startseite implementieren. Bild, Name und Preis anzeigen.                                       | 1.5      |
+| ~~Navbar implementieren~~       | ~~Einfache Navigation mit Links erstellen. Eingeloggten User anzeigen.~~                                               | ~~1~~        |
+| ~~Cards im Frontend~~           | ~~Post-Cards auf der Startseite implementieren. Bild, Name und Preis anzeigen.~~                                       | ~~1.5~~      |
 | Post erstellen Frontend     | Formular für neue Poosts bauen. Alle Felder und Bild-Upload einbinden.                                             | 2        |
 | Detailseite Frontend        | Einzelne Detailseite pro Inserat erstellen. Alle Infos und das Bild anzeigen.                                      | 1        |
 | Styling                     | Grundlegendes CSS für alle Seiten. Website übersichtlich und sauber gestalten.                                     | 1.5      |
@@ -34,6 +34,7 @@
 | 11.06.2026 | 19:00-21:10<br/>21:10-22:30                                                                   | Ich habe angefangen an den Inseraten zu arbeiten und die Felder zu erstellen.<br/> Ich habe anefangen alle Endpunke für die CRUD Operatoren zu schreiben.                                                                                                         |
 | 12.06.2026 | 17:00-19:15<br/>19:20-21:45                                                                   | Ich habe angefangen an dem Bild-upload zu arbeiten.<br/>Ich habe angefangen meine API's zu testen und alle fehler zu beheben                                                                                                                                      |
 | 13.06.2026 | 17:00-18:30                                                                                   | Ich habe angefangen die Registrierung und das Login in meinem Frontend zu implementieren.                                                                                                                                                                         |
+| 15.06.2026 | 13:55-14:55<br/>14:55-15:30                                                                   | Kleine Einführung zum heutigen Tag gehabt, 2 Videos geschaut und meine Navabr implementiert.<br/> Ich habe nun die Implementation gebaut, dass all meien Posts auf der /listings seite sehen kann.                                                                |
 
 ----------------------------------------------------------------------------------------------------------------
 # Projektplanung
@@ -445,3 +446,21 @@ ALTER TABLE users ADD COLUMN role VARCHAR(20) DEFAULT 'user';
 
 ## Responsiveness 
 <p> Das Design wurde so implementiert, dass es responsive ist.</p>
+
+----------------------------------------------------------------------------------------------------------------
+# Inserat Cards 
+
+<p> Auf der Startseite werden alle Inserate als Cards angeziegt mit Bild, Name und Preis. En Klick auf eine Card öffnet eine Detailansicht</p>
+
+## Berechtigung 
+- Alle User sehen die anderen Inserate
+- Ein normaler User kann nur seine eigenen Inserate bearbeiten oder löschen 
+- Ein Admin kann alle Inserate bearbeiten oder löschen
+
+## Bearbeiten 
+<p> Im Detailmodus kann ein berechtigter User auf "bearbeiten" klicken, die Felder ändern und dann speichern</p>
+
+## Löschen 
+<p> Mit "Löschen" wrd das Inserat gelöscht.</p>
+
+----------------------------------------------------------------------------------------------------------------

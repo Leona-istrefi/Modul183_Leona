@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
 import Button from '../atoms/Button';
 import Input from '../atoms/Input';
 import ErrorMessage from '../atoms/ErrorMessage';
 import '../styles/molecules.css';
+
+interface DecodedToken {
+    sub: string;
+    role: string;
+    userId: number;
+}
 
 const LoginForm = () => {
     const [username, setUsername] = useState('');
@@ -19,8 +26,14 @@ const LoginForm = () => {
             const response = await axios.post('http://localhost:8080/login', params, {
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
             });
+
+            const decoded = jwtDecode<DecodedToken>(response.data.token);
+
             localStorage.setItem('token', response.data.token);
-            localStorage.setItem('username', username);
+            localStorage.setItem('username', decoded.sub);
+            localStorage.setItem('role', decoded.role);
+            localStorage.setItem('userId', String(decoded.userId));
+
             window.location.href = '/listings';
         } catch (e: any) {
             setError('Falscher Username oder Passwort: ' + (e.response?.data || e.message));

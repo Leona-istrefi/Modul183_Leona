@@ -1,9 +1,6 @@
 package com.kleidung;
 
-import com.kleidung.handler.ImageHandler;
-import com.kleidung.handler.ListingHandler;
-import com.kleidung.handler.LoginHandler;
-import com.kleidung.handler.RegisterHandler;
+import com.kleidung.handler.*;
 import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
@@ -16,6 +13,7 @@ public class Main {
         server.createContext("/login", new LoginHandler());
         server.createContext("/image", new ImageHandler());
         server.createContext("/listings", new ListingHandler());
+        server.createContext("/uploads", new StaticFileHandler());
         server.start();
         System.out.println("Server läuft auf Port 8080");
     }
