@@ -1,3 +1,5 @@
+# Note: Liebeer Herr Van Essen, bitte schauen sie sich den "develop" branch an und nicht den main. Erst am Ende werde ich alle meine changes im Main haben. Danke!
+
 # Modul183_Leona
 
 ## Projektbeschreib
