@@ -10,13 +10,17 @@ public class ListingService {
 
     private final ListingRepository listingRepository = new ListingRepository();
 
-    public void create(int userId, String name, String zustand, String groesse, double preis, String beschreibung) throws SQLException {
-        Listing listing = new Listing(0, userId, name, zustand, groesse, preis, beschreibung);
+    public void create(int userId, String name, String zustand, String groesse, double preis, String beschreibung, boolean isPublic) throws SQLException {
+        Listing listing = new Listing(0, userId, name, zustand, groesse, preis, beschreibung, isPublic);
         listingRepository.save(listing);
     }
 
     public List<Listing> getAll() throws SQLException {
         return listingRepository.findAll();
+    }
+
+    public List<Listing> getVisible(Integer currentUserId) throws SQLException {
+        return listingRepository.findVisible(currentUserId);
     }
 
     public Listing getById(int id) throws SQLException {

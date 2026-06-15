@@ -9,7 +9,6 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.List;
@@ -21,9 +20,10 @@ public class ListingHandler implements HttpHandler {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-        String method = exchange.getRequestMethod();
         CorsUtil.addCorsHeaders(exchange);
         if (CorsUtil.handleOptions(exchange)) return;
+
+        String method = exchange.getRequestMethod();
 
         switch (method) {
             case "GET" -> handleGet(exchange);
@@ -36,7 +36,13 @@ public class ListingHandler implements HttpHandler {
 
     private void handleGet(HttpExchange exchange) throws IOException {
         try {
-            List<Listing> listings = listingService.getAll();
+            Integer currentUserId = null;
+            String authHeader = exchange.getRequestHeaders().getFirst("Authorization");
+            if (authHeader != null && authHeader.startsWith("Bearer ")) {
+                currentUserId = JwtUtil.getUserIdFromToken(authHeader.substring(7));
+            }
+
+            List<Listing> listings = listingService.getVisible(currentUserId);
             StringBuilder json = new StringBuilder("[");
             for (int i = 0; i < listings.size(); i++) {
                 Listing l = listings.get(i);
@@ -47,18 +53,13 @@ public class ListingHandler implements HttpHandler {
                         .append("\"zustand\":\"").append(l.getZustand()).append("\",")
                         .append("\"groesse\":\"").append(l.getGroesse()).append("\",")
                         .append("\"preis\":").append(l.getPreis()).append(",")
-                        .append("\"beschreibung\":\"").append(l.getBeschreibung()).append("\"")
+                        .append("\"beschreibung\":\"").append(l.getBeschreibung()).append("\",")
+                        .append("\"isPublic\":").append(l.isPublic())
                         .append("}");
                 if (i < listings.size() - 1) json.append(",");
             }
             json.append("]");
-            String response = json.toString();
-            byte[] bytes = response.getBytes("UTF-8");
-            exchange.getResponseHeaders().set("Content-Type", "application/json");
-            exchange.sendResponseHeaders(200, bytes.length);
-            OutputStream os = exchange.getResponseBody();
-            os.write(bytes);
-            os.close();
+            sendJson(exchange, 200, json.toString());
         } catch (SQLException e) {
             sendError(exchange, 500, "Fehler: " + e.getMessage());
         }
@@ -75,9 +76,10 @@ public class ListingHandler implements HttpHandler {
             String groesse = extractParam(body, "groesse");
             double preis = Double.parseDouble(extractParam(body, "preis"));
             String beschreibung = extractParam(body, "beschreibung");
+            boolean isPublic = !extractParam(body, "isPublic").equals("false");
 
             int userId = userRepository.findByUsername(username).getId();
-            listingService.create(userId, name, zustand, groesse, preis, beschreibung);
+            listingService.create(userId, name, zustand, groesse, preis, beschreibung, isPublic);
             sendResponse(exchange, 200, "Inserat erstellt");
         } catch (SQLException e) {
             sendError(exchange, 500, "Fehler: " + e.getMessage());
@@ -108,6 +110,8 @@ public class ListingHandler implements HttpHandler {
             }
 
             String body = new String(exchange.getRequestBody().readAllBytes());
+            boolean isPublic = !extractParam(body, "isPublic").equals("false");
+
             Listing updated = new Listing(
                     id,
                     existing.getUserId(),
@@ -115,7 +119,8 @@ public class ListingHandler implements HttpHandler {
                     extractParam(body, "zustand"),
                     extractParam(body, "groesse"),
                     Double.parseDouble(extractParam(body, "preis")),
-                    extractParam(body, "beschreibung")
+                    extractParam(body, "beschreibung"),
+                    isPublic
             );
             listingService.update(updated);
             sendResponse(exchange, 200, "Inserat aktualisiert");
@@ -131,7 +136,6 @@ public class ListingHandler implements HttpHandler {
         try {
             String[] parts = exchange.getRequestURI().getPath().split("/");
             int id = Integer.parseInt(parts[parts.length - 1]);
-            System.out.println("Delete ID: " + id);
 
             Listing existing = listingService.getById(id);
             if (existing == null) {
@@ -142,7 +146,6 @@ public class ListingHandler implements HttpHandler {
             String token = exchange.getRequestHeaders().getFirst("Authorization").substring(7);
             String role = JwtUtil.getRoleFromToken(token);
             int userId = userRepository.findByUsername(username).getId();
-            System.out.println("Role: " + role + " userId: " + userId + " existingUserId: " + existing.getUserId());
 
             if (!role.equals("admin") && existing.getUserId() != userId) {
                 sendError(exchange, 403, "Keine Berechtigung");
@@ -152,8 +155,6 @@ public class ListingHandler implements HttpHandler {
             listingService.delete(id);
             sendResponse(exchange, 200, "Inserat gelöscht");
         } catch (Exception e) {
-            System.out.println("Delete Fehler: " + e.getMessage());
-            e.printStackTrace();
             sendError(exchange, 500, "Fehler: " + e.getMessage());
         }
     }
@@ -187,6 +188,15 @@ public class ListingHandler implements HttpHandler {
             }
         }
         return "";
+    }
+
+    private void sendJson(HttpExchange exchange, int code, String json) throws IOException {
+        byte[] bytes = json.getBytes("UTF-8");
+        exchange.getResponseHeaders().set("Content-Type", "application/json");
+        exchange.sendResponseHeaders(code, bytes.length);
+        OutputStream os = exchange.getResponseBody();
+        os.write(bytes);
+        os.close();
     }
 
     private void sendResponse(HttpExchange exchange, int code, String message) throws IOException {
