@@ -433,3 +433,15 @@ ALTER TABLE users ADD COLUMN role VARCHAR(20) DEFAULT 'user';
 **Fix:** 'CoursUtil.java' erstellt und in allen Handlers eingebaut
 
 ----------------------------------------------------------------------------------------------------------------
+
+# Navbar 
+<p> Simple Navbar über der Page</p>
+
+## Funktionen 
+- Link zu den Inseraten 
+- Zeigt an welcher User eingeloggt ist 
+- Logout Button 
+- Herz Icon, um die Favorisierten Inserate
+
+## Responsiveness 
+<p> Das Design wurde so implementiert, dass es responsive ist.</p>

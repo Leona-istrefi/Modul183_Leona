@@ -20,6 +20,7 @@ const LoginForm = () => {
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
             });
             localStorage.setItem('token', response.data.token);
+            localStorage.setItem('username', username);
             window.location.href = '/listings';
         } catch (e: any) {
             setError('Falscher Username oder Passwort: ' + (e.response?.data || e.message));
