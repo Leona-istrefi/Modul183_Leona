@@ -49,4 +49,19 @@ public class JwtUtil {
             return null;
         }
     }
+
+    public static Integer getUserIdFromToken(String token) {
+        try {
+            Object userId = Jwts.parserBuilder()
+                    .setSigningKey(key)
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody()
+                    .get("userId");
+            if (userId == null) return null;
+            return Integer.parseInt(userId.toString());
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

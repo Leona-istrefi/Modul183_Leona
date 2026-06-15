@@ -9,8 +9,9 @@ public class Listing {
     private String groesse;
     private double preis;
     private String beschreibung;
+    private boolean isPublic;
 
-    public Listing(int id, int userId, String name, String zustand, String groesse, double preis, String beschreibung) {
+    public Listing(int id, int userId, String name, String zustand, String groesse, double preis, String beschreibung, boolean isPublic) {
         this.id = id;
         this.userId = userId;
         this.name = name;
@@ -18,6 +19,7 @@ public class Listing {
         this.groesse = groesse;
         this.preis = preis;
         this.beschreibung = beschreibung;
+        this.isPublic = isPublic;
     }
 
     public int getId() { return id; }
@@ -27,4 +29,5 @@ public class Listing {
     public String getGroesse() { return groesse; }
     public double getPreis() { return preis; }
     public String getBeschreibung() { return beschreibung; }
+    public boolean isPublic() { return isPublic; }
 }
