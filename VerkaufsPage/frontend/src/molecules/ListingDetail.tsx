@@ -12,6 +12,7 @@ interface Listing {
     groesse: string;
     preis: number;
     beschreibung: string;
+    isPublic: boolean;
 }
 
 interface ListingDetailProps {
@@ -34,6 +35,7 @@ const ListingDetail: React.FC<ListingDetailProps> = ({ listing, imageUrl, onClos
     const [groesse, setGroesse] = useState(listing.groesse);
     const [preis, setPreis] = useState(listing.preis.toString());
     const [beschreibung, setBeschreibung] = useState(listing.beschreibung);
+    const [isPublic, setIsPublic] = useState(listing.isPublic);
     const [error, setError] = useState('');
 
     const handleDelete = async () => {
@@ -58,6 +60,7 @@ const ListingDetail: React.FC<ListingDetailProps> = ({ listing, imageUrl, onClos
             params.append('groesse', groesse);
             params.append('preis', preis);
             params.append('beschreibung', beschreibung);
+            params.append('isPublic', String(isPublic));
 
             await axios.put(`http://localhost:8080/listings/${listing.id}`, params, {
                 headers: {
@@ -66,7 +69,7 @@ const ListingDetail: React.FC<ListingDetailProps> = ({ listing, imageUrl, onClos
                 }
             });
 
-            onUpdated({ ...listing, name, zustand, groesse, preis: parseFloat(preis), beschreibung });
+            onUpdated({ ...listing, name, zustand, groesse, preis: parseFloat(preis), beschreibung, isPublic });
             setIsEditing(false);
         } catch (e) {
             setError('Aktualisieren fehlgeschlagen');
@@ -93,6 +96,10 @@ const ListingDetail: React.FC<ListingDetailProps> = ({ listing, imageUrl, onClos
                         <Input type="text" placeholder="Grösse" value={groesse} onChange={(e) => setGroesse(e.target.value)} />
                         <Input type="number" placeholder="Preis" value={preis} onChange={(e) => setPreis(e.target.value)} />
                         <Input type="text" placeholder="Beschreibung" value={beschreibung} onChange={(e) => setBeschreibung(e.target.value)} />
+                        <label className="toggle-label">
+                            <input type="checkbox" checked={isPublic} onChange={(e) => setIsPublic(e.target.checked)} />
+                            Öffentlich sichtbar
+                        </label>
                         <div className="modal-actions">
                             <Button label="Speichern" onClick={handleUpdate} />
                             <Button label="Abbrechen" onClick={() => setIsEditing(false)} />
@@ -105,6 +112,7 @@ const ListingDetail: React.FC<ListingDetailProps> = ({ listing, imageUrl, onClos
                         <p><strong>Zustand:</strong> {listing.zustand}</p>
                         <p><strong>Grösse:</strong> {listing.groesse}</p>
                         <p><strong>Beschreibung:</strong> {listing.beschreibung}</p>
+                        <p><strong>Sichtbarkeit:</strong> {listing.isPublic ? 'Öffentlich' : 'Privat'}</p>
 
                         {canEdit && (
                             <div className="modal-actions">
