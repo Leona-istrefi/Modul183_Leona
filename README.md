@@ -4,37 +4,41 @@
 <p> Ich mache eine Website wo man Kleider verkaufen kann. Man kann sich registrieren und einloggen. Die Passwörter werden sicher gespeichert mit Salt & Pepper. Das Backend mache ich mit Java und das Frontend mit TypeScript. In der Datenbank werden der Benutzername und das gehashte Passwort gespeichert. Wenn man eingeloggt ist kann man Kleider hochladen mit Name, Zustand, Grösse, Preis, Beschreibung und einem Bild.Ich mache eine Website wo man Kleider verkaufen kann. Man kann sich registrieren und einloggen. Die Passwörter werden sicher gespeichert mit Salt & Pepper und bcrypt. Das Backend mache ich mit Java und das Frontend mit TypeScript. In der Datenbank werden der Benutzername und das gehashte Passwort gespeichert. Wenn man eingeloggt ist kann man Kleider hochladen mit Name, Zustand, Grösse, Preis, Beschreibung und einem Bild. </p>
 
 ## Zeitplan 
-| Name                        | Beschreibung                                                                                                       | Zeit (h) |
-|-----------------------------|--------------------------------------------------------------------------------------------------------------------|----------|
-| ~~Projektplanung~~            | ~~Architektur planen und Technologien festlegen. Datenbankstruktur skizzieren.~~                                   | ~~0.5~~  |
-| ~~Projekt aufsetzen~~           | ~~Spring Boot und React Projekt erstellen. Ordnerstruktur und Dependencies einrichten.~~                           | ~~1~~    |
-| ~~Datenbank aufsetzen~~         | ~~PostgreSQL installieren und konfigurieren. Tabellen für users, listings und images erstellen.~~                  | ~~1.5~~    |
-| ~~User Entity & Repository~~    | ~~Java Entity-Klassen für den User erstellen. JDBC Repository einrichten.~~                                        | ~~1~~      |
-| ~~Registrierung Backend~~       | ~~Register-Endpunkt implementieren mit Salt generieren und bcrypt Hashing. Benutzername und Hash in DB speichern.~~ | ~~2~~      |
-| ~~Login Backend~~               | ~~Login-Endpunkt implementieren und Passwort mit Hash vergleichen. JWT-Token zurückgeben.~~                        | ~~2~~      |
-| ~~Listing Entity & Repository~~ | ~~Java Entity für Inserate erstellen mit allen Feldern. JPA Repository und Service einrichten.~~                   | ~~1~~      |
-| ~~Listing CRUD Backend~~        | ~~Endpunkte für erstellen, abrufen und löschen von Inseraten. Nur eingeloggte User dürfen inserieren.~~              | ~~2~~      |
-| ~~Bild-Upload Backend~~         | ~~Multipart Endpunkt für Bild-Upload implementieren. Datei lokal speichern und Pfad in DB speichern.~~                 | ~~2~~      |
-| ~~API testen~~                  | ~~Alle Endpunkte mit Postman testen. Fehler beheben.~~                                                                 | ~~1~~      |
-| ~~Login & Register Frontend~~   | ~~Loginseite und Registrierungsseite in React bauen. Formular mit API verbinden.~~                                     | ~~2~~        |
-| ~~Navbar implementieren~~       | ~~Einfache Navigation mit Links erstellen. Eingeloggten User anzeigen.~~                                               | ~~1~~        |
-| ~~Cards im Frontend~~           | ~~Post-Cards auf der Startseite implementieren. Bild, Name und Preis anzeigen.~~                                       | ~~1.5~~      |
-| Post erstellen Frontend     | Formular für neue Poosts bauen. Alle Felder und Bild-Upload einbinden.                                             | 2        |
-| Detailseite Frontend        | Einzelne Detailseite pro Inserat erstellen. Alle Infos und das Bild anzeigen.                                      | 1        |
-| Styling                     | Grundlegendes CSS für alle Seiten. Website übersichtlich und sauber gestalten.                                     | 1.5      |
-| Letzter Test & Bugfixing    | Gesamte App durchklicken und Fehler beheben. Sicherstellen dass alles funktioniert.                                | 1        |
-| Letzter Commit & Doku       | Code aufräumen und kommentieren. README schreiben und auf GitHub pushen.                                           | 1        |
-| **Total**                   |                                                                                                                    | **25 h** |
+| Name                            | Beschreibung                                                                                                                     | Zeit (h)   |
+|---------------------------------|----------------------------------------------------------------------------------------------------------------------------------|------------|
+| ~~Projektplanung~~              | ~~Architektur planen und Technologien festlegen. Datenbankstruktur skizzieren.~~                                                 | ~~0.5~~    |
+| ~~Projekt aufsetzen~~           | ~~Spring Boot und React Projekt erstellen. Ordnerstruktur und Dependencies einrichten.~~                                         | ~~1~~      |
+| ~~Datenbank aufsetzen~~         | ~~PostgreSQL installieren und konfigurieren. Tabellen für users, listings und images erstellen.~~                                | ~~1.5~~    |
+| ~~User Entity & Repository~~    | ~~Java Entity-Klassen für den User erstellen. JDBC Repository einrichten.~~                                                      | ~~1~~      |
+| ~~Registrierung Backend~~       | ~~Register-Endpunkt implementieren mit Salt generieren und bcrypt Hashing. Benutzername und Hash in DB speichern.~~              | ~~2~~      |
+| ~~Login Backend~~               | ~~Login-Endpunkt implementieren und Passwort mit Hash vergleichen. JWT-Token zurückgeben.~~                                      | ~~2~~      |
+| ~~Listing Entity & Repository~~ | ~~Java Entity für Inserate erstellen mit allen Feldern. JPA Repository und Service einrichten.~~                                 | ~~1~~      |
+| ~~Listing CRUD Backend~~        | ~~Endpunkte für erstellen, abrufen und löschen von Inseraten. Nur eingeloggte User dürfen inserieren.~~                          | ~~2~~      |
+| ~~Bild-Upload Backend~~         | ~~Multipart Endpunkt für Bild-Upload implementieren. Datei lokal speichern und Pfad in DB speichern.~~                           | ~~2~~      |
+| ~~API testen~~                  | ~~Alle Endpunkte mit Postman testen. Fehler beheben.~~                                                                           | ~~1~~      |
+| ~~Login & Register Frontend~~   | ~~Loginseite und Registrierungsseite in React bauen. Formular mit API verbinden.~~                                               | ~~2~~      |
+| ~~Navbar implementieren~~       | ~~Einfache Navigation mit Links erstellen. Eingeloggten User anzeigen.~~                                                         | ~~1~~      |
+| ~~Cards im Frontend~~           | ~~Post-Cards auf der Startseite implementieren. Bild, Name und Preis anzeigen.~~                                                 | ~~1.5~~    |
+| ~~Post erstellen Frontend~~         | ~~Formular für neue Poosts bauen. Alle Felder und Bild-Upload einbinden.~~                                                           | ~~2~~          |
+| ~~Detailseite Frontend~~            | ~~Einzelne Detailseite pro Inserat erstellen. Alle Infos und das Bild anzeigen.~~                                                    | ~~1~~          |
+| Styling                         | Grundlegendes CSS für alle Seiten. Website übersichtlich und sauber gestalten.                                                   | 1.5        |
+| Navigation verbessern           | Die Navigation bei der Registrierung sollte verbessert werden, nach dem Registrieren direkt eingeloggt sein                      | 0.5        |
+| User Profile hinzufügen         | Der User sollte seine eigene user Profile Page haben wo er username/passwort ändern kann und ein PB hinzufügen kann.             | 1.5        |
+| Anmeldung mit Email             | Man sollte sich auch mit seiner E-mail einloggen, statt nur mit dem username.                                                    | 0.5        |
+| Warenkorb                       | Falls man ein Inserat von andern kaufen will, kann man es in den Warenkorb tun. Wenn man es gekauft hat verschwindet das Inserat | 2          |
+| Letzter Test & Bugfixing        | Gesamte App durchklicken und Fehler beheben. Sicherstellen dass alles funktioniert.                                              | 1          |
+| Letzter Commit & Doku           | Code aufräumen und kommentieren. README schreiben und auf GitHub pushen.                                                         | 1          |
+| **Total**                       |                                                                                                                                  | **29.5 h** |
 
 ## Arbeitsjournal 
-| Datum      | Zeit (h)                                                                                      | Was wurde erledigt                                                                                                                                                                                                                                                |
-|------------|-----------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 08.06.2026 | 13:55-14:30<br/>14:30-15:00<br/> 15:00-15:30<br/>15:30-16:30<br/> 16:30-17:00<br/>17:00-17:35 | Einführung in den Unterricht und Videos schauen.<br/>Ich habe meine Projektplanung im README.md festgelegt<br/> Pause <br/>Ich habe mein Projekt aufgesetzt<br/> ich habe meine datenbank aufsetzen.<br/> Angefangen meine Java user entity klassen zu erstellen. |
-| 10.06.2026 | 19:00-21:00<br/>21:00-23:00                                                                   | Angefangen meine Register Points zu implementieren<br/>Ich habe den Login Endpunkt implementiert                                                                                                                                                                  |
-| 11.06.2026 | 19:00-21:10<br/>21:10-22:30                                                                   | Ich habe angefangen an den Inseraten zu arbeiten und die Felder zu erstellen.<br/> Ich habe anefangen alle Endpunke für die CRUD Operatoren zu schreiben.                                                                                                         |
-| 12.06.2026 | 17:00-19:15<br/>19:20-21:45                                                                   | Ich habe angefangen an dem Bild-upload zu arbeiten.<br/>Ich habe angefangen meine API's zu testen und alle fehler zu beheben                                                                                                                                      |
-| 13.06.2026 | 17:00-18:30                                                                                   | Ich habe angefangen die Registrierung und das Login in meinem Frontend zu implementieren.                                                                                                                                                                         |
-| 15.06.2026 | 13:55-14:55<br/>14:55-15:30                                                                   | Kleine Einführung zum heutigen Tag gehabt, 2 Videos geschaut und meine Navabr implementiert.<br/> Ich habe nun die Implementation gebaut, dass all meien Posts auf der /listings seite sehen kann.                                                                |
+| Datum      | Zeit (h)                                                                                      | Was wurde erledigt                                                                                                                                                                                                                                                                                                                   |
+|------------|-----------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 08.06.2026 | 13:55-14:30<br/>14:30-15:00<br/> 15:00-15:30<br/>15:30-16:30<br/> 16:30-17:00<br/>17:00-17:35 | Einführung in den Unterricht und Videos schauen.<br/>Ich habe meine Projektplanung im README.md festgelegt<br/> Pause <br/>Ich habe mein Projekt aufgesetzt<br/> ich habe meine datenbank aufsetzen.<br/> Angefangen meine Java user entity klassen zu erstellen.                                                                    |
+| 10.06.2026 | 19:00-21:00<br/>21:00-23:00                                                                   | Angefangen meine Register Points zu implementieren<br/>Ich habe den Login Endpunkt implementiert                                                                                                                                                                                                                                     |
+| 11.06.2026 | 19:00-21:10<br/>21:10-22:30                                                                   | Ich habe angefangen an den Inseraten zu arbeiten und die Felder zu erstellen.<br/> Ich habe anefangen alle Endpunke für die CRUD Operatoren zu schreiben.                                                                                                                                                                            |
+| 12.06.2026 | 17:00-19:15<br/>19:20-21:45                                                                   | Ich habe angefangen an dem Bild-upload zu arbeiten.<br/>Ich habe angefangen meine API's zu testen und alle fehler zu beheben                                                                                                                                                                                                         |
+| 13.06.2026 | 17:00-18:30                                                                                   | Ich habe angefangen die Registrierung und das Login in meinem Frontend zu implementieren.                                                                                                                                                                                                                                            |
+| 15.06.2026 | 13:55-14:55<br/>14:55-15:30<br/>15:30-17:00<br/>17:00-17:35                                   | Kleine Einführung zum heutigen Tag gehabt, 2 Videos geschaut und meine Navabr implementiert.<br/> Ich habe nun die Implementation gebaut, dass all meien Posts auf der /listings seite sehen kann.<br/> Daran gearbeitet, dass man Posts erstellen kann, favorisieren kann und auf öffentlich/privat setzen kann<br/>Videos geschaut |
 
 ----------------------------------------------------------------------------------------------------------------
 # Projektplanung
@@ -462,5 +466,80 @@ ALTER TABLE users ADD COLUMN role VARCHAR(20) DEFAULT 'user';
 
 ## Löschen 
 <p> Mit "Löschen" wrd das Inserat gelöscht.</p>
+
+----------------------------------------------------------------------------------------------------------------
+
+# Inserat erstellen über + Button und Detaillisten ansicht 
+
+<p> Auf der '/listings Seite gibt es unten Rechts einen '+' Button. Ein Klick öffnet eine Karte mit allen Feldern, welche man ausfüllen kann</p>
+
+## Felder 
+- Name 
+- Zustand 
+- Grösse 
+- Preis 
+- Beschreibung 
+- Bild 
+- Sichtbarkeit (Öffentlich/Privat)
+
+## Ablauf
+1. User füllt das Formular im der Karte aus
+2. Daten werden per `POST /listings` an das Backend geschickt
+3. Falls ein Bild ausgewählt wurde, wird es per `POST /image/{id}` zum neu erstellten Inserat hochgeladen
+4. Das neue Inserat erscheint sofort in der Übersicht
+
+## Öffentlich / Privat
+<p> Jedes Inserat hat eine Sichtbarkeit, die beim Erstellen oder Bearbeiten gesetzt werden kann.</p>
+
+## Sichtbarkeit
+- **Öffentlich:** Das Inserat ist für alle User sichtbar
+- **Privat:** Das Inserat ist nur für den Ersteller sichtbar
+- 
+## Detailseite / Detail-Modal
+<p>Ein Klick auf eine Inserat Card öffnet ein Detail Karte mit allen Informationen zum Inserat.</p>
+
+## Angezeigte Informationen
+- Bild
+- Name
+- Preis
+
+## Berechtigungen
+- Alle User können die Details eines öffentlichen Inserats sehen
+- Bearbeiten- und Löschen Buttons werden nur angezeigt wenn der eingeloggte User der Besitzer ist oder Admin-Rechte hat
+
+## Bearbeiten
+<p>In der Karte kann ein berechtigter User auf "Bearbeiten" klicken. Die Felder werden zu Eingabefeldern und können mit "Speichern" per `PUT /listings/{id}` aktualisiert werden.</p>
+
+## Löschen
+<p> Mit "Löschen" wird das Inserat per `DELETE /listings/{id}` entfernt und die Karte schliesst sich automatisch.</p>
+
+## Favoriten
+<p>Eingeloggte User können öffentliche Inserate anderer User favorisieren.</p>
+
+## Funktionsweise
+- Auf jeder Card eines öffentlichen Inserats (das nicht dem eigenen User gehört) wird ein Herz-Icon angezeigt
+- Ein Klick auf das Herz fügt das Inserat zu den Favoriten hinzu oder entfernt es wieder
+- Unter `/favorites` (Herz Icon in der Navbar) sieht man alle favorisierten Inserate
+
+## Datenbank
+- Eine neue Tabelle `favorites` speichert die Verknüpfung zwischen `user_id` und `listing_id`.
+- Eine `UNIQUE` Constraint verhindert doppelte Favoriten.
+
+## Endpunkte
+- `GET /favorites` – Alle favorisierten Inserate des eingeloggten Users abrufen
+- `POST /favorites/{listingId}` – Favorit hinzufügen oder entfernen 
+
+## Berechtigungen
+- Nur eingeloggte User können favorisieren
+- Eigene Inserate können nicht favorisiert werden (kein Herz Icon)
+
+## Gefundene Fehler und Fixes
+**CORS Fehler bei /favorites**
+Der `FavoriteHandler` hatte keine CORS-Header gesetzt, wodurch der Browser alle Anfragen an `/favorites` blockierte.
+**Fix:** `CorsUtil.addCorsHeaders()` und `CorsUtil.handleOptions()` in `FavoriteHandler.java` eingebunden und den Context `/favorites` in `Main.java` registriert.
+
+**CORS Fehler beim Erstellen von Inseraten (Access-Control-Allow-Origin enthält mehrere Werte)**
+`addCorsHeaders()` wurde durch `.add()` zweimal aufgerufen, wodurch der Header `Access-Control-Allow-Origin: *, *` ungültig wurde.
+**Fix:** In `CorsUtil.java` `.add()` durch `.set()` ersetzt, damit der Header nur einmal gesetzt wird.
 
 ----------------------------------------------------------------------------------------------------------------

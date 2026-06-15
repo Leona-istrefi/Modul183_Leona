@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ListingCard from '../molecules/ListingCard';
 import ListingDetail from '../molecules/ListingDetail';
-import CreateListingModal from '../molecules/CreateListingModal';
 import '../styles/molecules.css';
 
 interface Listing {
@@ -16,24 +15,20 @@ interface Listing {
     isPublic: boolean;
 }
 
-const Listings = () => {
+const Favorites = () => {
     const [listings, setListings] = useState<Listing[]>([]);
     const [images, setImages] = useState<{ [key: number]: string | null }>({});
-    const [favoriteIds, setFavoriteIds] = useState<number[]>([]);
     const [selected, setSelected] = useState<Listing | null>(null);
-    const [showCreate, setShowCreate] = useState(false);
     const token = localStorage.getItem('token');
-    const currentUserId = Number(localStorage.getItem('userId'));
 
     useEffect(() => {
-        loadListings();
-        if (token) loadFavorites();
+        loadFavorites();
     }, []);
 
-    const loadListings = async () => {
+    const loadFavorites = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/listings', {
-                headers: token ? { Authorization: `Bearer ${token}` } : {}
+            const response = await axios.get('http://localhost:8080/favorites', {
+                headers: { Authorization: `Bearer ${token}` }
             });
             const data: Listing[] = response.data;
             setListings(data);
@@ -51,17 +46,6 @@ const Listings = () => {
             }
             setImages(imageMap);
         } catch (e) {
-            console.error('Fehler beim Laden der Inserate', e);
-        }
-    };
-
-    const loadFavorites = async () => {
-        try {
-            const response = await axios.get('http://localhost:8080/favorites', {
-                headers: { Authorization: `Bearer ${token}` }
-            });
-            setFavoriteIds(response.data.map((l: Listing) => l.id));
-        } catch (e) {
             console.error('Fehler beim Laden der Favoriten', e);
         }
     };
@@ -71,11 +55,9 @@ const Listings = () => {
             await axios.post(`http://localhost:8080/favorites/${listingId}`, null, {
                 headers: { Authorization: `Bearer ${token}` }
             });
-            setFavoriteIds((prev) =>
-                prev.includes(listingId) ? prev.filter((id) => id !== listingId) : [...prev, listingId]
-            );
+            setListings(listings.filter((l) => l.id !== listingId));
         } catch (e) {
-            console.error('Fehler beim Favorisieren', e);
+            console.error('Fehler beim Entfernen', e);
         }
     };
 
@@ -90,7 +72,8 @@ const Listings = () => {
 
     return (
         <div className="listings-page">
-            <h2 className="listings-title">Alle Inserate</h2>
+            <h2 className="listings-title">Meine Favoriten</h2>
+            {listings.length === 0 && <p>Du hast noch keine Favoriten.</p>}
             <div className="listings-grid">
                 {listings.map((listing) => (
                     <ListingCard
@@ -99,19 +82,13 @@ const Listings = () => {
                         preis={listing.preis}
                         imageUrl={images[listing.id] || null}
                         isPublic={listing.isPublic}
-                        isFavorite={favoriteIds.includes(listing.id)}
-                        showFavoriteIcon={!!token && listing.isPublic && listing.userId !== currentUserId}
+                        isFavorite={true}
+                        showFavoriteIcon={true}
                         onClick={() => setSelected(listing)}
                         onToggleFavorite={() => handleToggleFavorite(listing.id)}
                     />
                 ))}
             </div>
-
-            {token && (
-                <button className="fab-button" onClick={() => setShowCreate(true)} title="Inserat erstellen">
-                    +
-                </button>
-            )}
 
             {selected && (
                 <ListingDetail
@@ -122,15 +99,8 @@ const Listings = () => {
                     onUpdated={handleUpdated}
                 />
             )}
-
-            {showCreate && (
-                <CreateListingModal
-                    onClose={() => setShowCreate(false)}
-                    onCreated={loadListings}
-                />
-            )}
         </div>
     );
 };
 
-export default Listings;
+export default Favorites;
