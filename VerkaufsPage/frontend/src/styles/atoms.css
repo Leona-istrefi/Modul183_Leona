@@ -36,3 +36,11 @@
     color: #2ecc71;
     font-size: 0.875rem;
 }
+
+.btn-danger {
+    background-color: #e74c3c;
+}
+
+.btn-danger:hover {
+    background-color: #c0392b;
+}

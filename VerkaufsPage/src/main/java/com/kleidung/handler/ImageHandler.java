@@ -1,15 +1,15 @@
 package com.kleidung.handler;
 
+import com.kleidung.model.Image;
 import com.kleidung.service.ImageService;
+import com.kleidung.util.CorsUtil;
 import com.kleidung.util.JwtUtil;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import com.kleidung.util.CorsUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.sql.SQLException;
 
 public class ImageHandler implements HttpHandler {
 
@@ -17,12 +17,18 @@ public class ImageHandler implements HttpHandler {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-        try {
-            System.out.println("ImageHandler aufgerufen");
-            CorsUtil.addCorsHeaders(exchange);
-            if (CorsUtil.handleOptions(exchange)) return;
+        CorsUtil.addCorsHeaders(exchange);
+        if (CorsUtil.handleOptions(exchange)) return;
 
-            if (!exchange.getRequestMethod().equals("POST")) {
+        try {
+            String method = exchange.getRequestMethod();
+
+            if (method.equals("GET")) {
+                handleGet(exchange);
+                return;
+            }
+
+            if (!method.equals("POST")) {
                 exchange.sendResponseHeaders(405, -1);
                 return;
             }
@@ -39,26 +45,38 @@ public class ImageHandler implements HttpHandler {
             }
 
             String[] parts = exchange.getRequestURI().getPath().split("/");
-            System.out.println("Path parts: " + parts.length);
             int listingId = Integer.parseInt(parts[parts.length - 1]);
-            System.out.println("Listing ID: " + listingId);
 
             String filename = exchange.getRequestHeaders().getFirst("X-Filename");
             if (filename == null) filename = "bild.jpg";
-            System.out.println("Filename: " + filename);
 
             InputStream imageStream = exchange.getRequestBody();
             imageService.uploadImage(listingId, imageStream, filename);
             sendResponse(exchange, 200, "Bild hochgeladen");
 
         } catch (Exception e) {
-            System.out.println("Fehler: " + e.getMessage());
-            e.printStackTrace();
-            String response = "Fehler: " + e.getMessage();
-            exchange.sendResponseHeaders(500, response.length());
+            sendError(exchange, 500, "Fehler: " + e.getMessage());
+        }
+    }
+
+    private void handleGet(HttpExchange exchange) throws IOException {
+        try {
+            String[] parts = exchange.getRequestURI().getPath().split("/");
+            int listingId = Integer.parseInt(parts[parts.length - 1]);
+
+            Image image = imageService.getByListingId(listingId);
+            String response = image == null
+                    ? "{\"filepath\":null}"
+                    : "{\"filepath\":\"" + image.getFilepath() + "\"}";
+
+            byte[] bytes = response.getBytes("UTF-8");
+            exchange.getResponseHeaders().set("Content-Type", "application/json");
+            exchange.sendResponseHeaders(200, bytes.length);
             OutputStream os = exchange.getResponseBody();
-            os.write(response.getBytes());
+            os.write(bytes);
             os.close();
+        } catch (Exception e) {
+            sendError(exchange, 500, "Fehler: " + e.getMessage());
         }
     }
 

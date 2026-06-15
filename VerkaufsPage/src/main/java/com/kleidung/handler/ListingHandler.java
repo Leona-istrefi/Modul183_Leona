@@ -176,7 +176,15 @@ public class ListingHandler implements HttpHandler {
     private String extractParam(String body, String key) {
         for (String param : body.split("&")) {
             String[] pair = param.split("=");
-            if (pair[0].equals(key)) return pair[1];
+            if (pair.length == 2) {
+                try {
+                    String decodedKey = java.net.URLDecoder.decode(pair[0], "UTF-8").trim();
+                    String decodedValue = java.net.URLDecoder.decode(pair[1], "UTF-8").trim();
+                    if (decodedKey.equals(key)) return decodedValue;
+                } catch (Exception e) {
+                    return "";
+                }
+            }
         }
         return "";
     }

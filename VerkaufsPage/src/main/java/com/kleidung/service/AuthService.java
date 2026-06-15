@@ -55,6 +55,7 @@ public class AuthService {
         return Jwts.builder()
                 .setSubject(username)
                 .claim("role", userRepository.findByUsername(username).getRole())
+                .claim("userId", user.getId())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 86400000))
                 .signWith(key)
