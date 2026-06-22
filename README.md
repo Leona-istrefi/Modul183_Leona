@@ -19,16 +19,17 @@
 | ~~Login & Register Frontend~~   | ~~Loginseite und Registrierungsseite in React bauen. Formular mit API verbinden.~~                                               | ~~2~~      |
 | ~~Navbar implementieren~~       | ~~Einfache Navigation mit Links erstellen. Eingeloggten User anzeigen.~~                                                         | ~~1~~      |
 | ~~Cards im Frontend~~           | ~~Post-Cards auf der Startseite implementieren. Bild, Name und Preis anzeigen.~~                                                 | ~~1.5~~    |
-| ~~Post erstellen Frontend~~         | ~~Formular für neue Poosts bauen. Alle Felder und Bild-Upload einbinden.~~                                                           | ~~2~~          |
-| ~~Detailseite Frontend~~            | ~~Einzelne Detailseite pro Inserat erstellen. Alle Infos und das Bild anzeigen.~~                                                    | ~~1~~          |
+| ~~Post erstellen Frontend~~     | ~~Formular für neue Poosts bauen. Alle Felder und Bild-Upload einbinden.~~                                                       | ~~2~~      |
+| ~~Detailseite Frontend~~        | ~~Einzelne Detailseite pro Inserat erstellen. Alle Infos und das Bild anzeigen.~~                                                | ~~1~~      |
 | Styling                         | Grundlegendes CSS für alle Seiten. Website übersichtlich und sauber gestalten.                                                   | 1.5        |
-| Navigation verbessern           | Die Navigation bei der Registrierung sollte verbessert werden, nach dem Registrieren direkt eingeloggt sein                      | 0.5        |
+| ~~Navigation verbessern~~       | ~~Die Navigation bei der Registrierung sollte verbessert werden, nach dem Registrieren direkt eingeloggt sein~~                  | ~~0.5~~    |
+| Verbesserungen                  | Verbesserungen von herr van essen implementieren                                                                                 | 1          |
 | User Profile hinzufügen         | Der User sollte seine eigene user Profile Page haben wo er username/passwort ändern kann und ein PB hinzufügen kann.             | 1.5        |
 | Anmeldung mit Email             | Man sollte sich auch mit seiner E-mail einloggen, statt nur mit dem username.                                                    | 0.5        |
 | Warenkorb                       | Falls man ein Inserat von andern kaufen will, kann man es in den Warenkorb tun. Wenn man es gekauft hat verschwindet das Inserat | 2          |
 | Letzter Test & Bugfixing        | Gesamte App durchklicken und Fehler beheben. Sicherstellen dass alles funktioniert.                                              | 1          |
 | Letzter Commit & Doku           | Code aufräumen und kommentieren. README schreiben und auf GitHub pushen.                                                         | 1          |
-| **Total**                       |                                                                                                                                  | **29.5 h** |
+| **Total**                       |                                                                                                                                  | **30.5 h** |
 
 ## Arbeitsjournal 
 | Datum      | Zeit (h)                                                                                      | Was wurde erledigt                                                                                                                                                                                                                                                                                                                   |
@@ -39,6 +40,8 @@
 | 12.06.2026 | 17:00-19:15<br/>19:20-21:45                                                                   | Ich habe angefangen an dem Bild-upload zu arbeiten.<br/>Ich habe angefangen meine API's zu testen und alle fehler zu beheben                                                                                                                                                                                                         |
 | 13.06.2026 | 17:00-18:30                                                                                   | Ich habe angefangen die Registrierung und das Login in meinem Frontend zu implementieren.                                                                                                                                                                                                                                            |
 | 15.06.2026 | 13:55-14:55<br/>14:55-15:30<br/>15:30-17:00<br/>17:00-17:35                                   | Kleine Einführung zum heutigen Tag gehabt, 2 Videos geschaut und meine Navabr implementiert.<br/> Ich habe nun die Implementation gebaut, dass all meien Posts auf der /listings seite sehen kann.<br/> Daran gearbeitet, dass man Posts erstellen kann, favorisieren kann und auf öffentlich/privat setzen kann<br/>Videos geschaut |
+| 22.06.2026 | 13:55-14:55                                  | Navigation verbessern                                                                                                                                                                                                                                                                                                                |
+| 29.06.2026 | 13:55-14:55                                  |                                                                                                                                                                                                                                                                                                                                      |
 
 ----------------------------------------------------------------------------------------------------------------
 # Projektplanung
@@ -543,3 +546,13 @@ Der `FavoriteHandler` hatte keine CORS-Header gesetzt, wodurch der Browser alle 
 **Fix:** In `CorsUtil.java` `.add()` durch `.set()` ersetzt, damit der Header nur einmal gesetzt wird.
 
 ----------------------------------------------------------------------------------------------------------------
+# Navigation – Registrierung
+
+<p> Nach der Registrierung wird der User automatisch eingeloggt und direkt auf `/listings` weitergeleitet.</p>
+
+## Ablauf
+1. User füllt das Registrierungsformular aus
+2. Account wird per `POST /register` erstellt
+3. Automatisch wird per `POST /login` eingeloggt
+4. JWT-Token, Username, Rolle und UserId werden im `localStorage` gespeichert
+5. User wird direkt auf `/listings` weitergeleitet

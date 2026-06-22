@@ -4,6 +4,7 @@ import Button from '../atoms/Button';
 import Input from '../atoms/Input';
 import ErrorMessage from '../atoms/ErrorMessage';
 import '../styles/molecules.css';
+import {jwtDecode} from "jwt-decode";
 
 const RegisterForm = () => {
     const [username, setUsername] = useState('');
@@ -11,6 +12,12 @@ const RegisterForm = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
+
+    interface DecodedToken {
+        sub: string;
+        role: string;
+        userId: number;
+    }
 
     const handleRegister = async () => {
         try {
@@ -22,14 +29,24 @@ const RegisterForm = () => {
             await axios.post('http://localhost:8080/register', params, {
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
             });
-            setSuccess('Registrierung erfolgreich! Du kannst dich jetzt einloggen.');
-            setError('');
+
+            const loginParams = new URLSearchParams();
+            loginParams.append('username', username);
+            loginParams.append('password', password);
+
+            const loginResponse = await axios.post('http://localhost:8080/login', loginParams, {
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            });
+
+            const decoded = jwtDecode<DecodedToken>(loginResponse.data.token);
+            localStorage.setItem('token', loginResponse.data.token);
+            localStorage.setItem('username', decoded.sub);
+            localStorage.setItem('role', decoded.role);
+            localStorage.setItem('userId', String(decoded.userId));
+
+            window.location.href = '/listings';
         } catch (e: any) {
-            if (e.response && e.response.status === 200) {
-                setSuccess('Registrierung erfolgreich!');
-            } else {
-                setError('Registrierung fehlgeschlagen: ' + (e.response?.data || e.message));
-            }
+            setError('Registrierung fehlgeschlagen: ' + (e.response?.data || e.message));
         }
     };
 
