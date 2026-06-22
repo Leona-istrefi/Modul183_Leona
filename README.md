@@ -4,32 +4,36 @@
 <p> Ich mache eine Website wo man Kleider verkaufen kann. Man kann sich registrieren und einloggen. Die Passwörter werden sicher gespeichert mit Salt & Pepper. Das Backend mache ich mit Java und das Frontend mit TypeScript. In der Datenbank werden der Benutzername und das gehashte Passwort gespeichert. Wenn man eingeloggt ist kann man Kleider hochladen mit Name, Zustand, Grösse, Preis, Beschreibung und einem Bild.Ich mache eine Website wo man Kleider verkaufen kann. Man kann sich registrieren und einloggen. Die Passwörter werden sicher gespeichert mit Salt & Pepper und bcrypt. Das Backend mache ich mit Java und das Frontend mit TypeScript. In der Datenbank werden der Benutzername und das gehashte Passwort gespeichert. Wenn man eingeloggt ist kann man Kleider hochladen mit Name, Zustand, Grösse, Preis, Beschreibung und einem Bild. </p>
 
 ## Zeitplan 
-| Name                            | Beschreibung                                                                                                                     | Zeit (h)   |
-|---------------------------------|----------------------------------------------------------------------------------------------------------------------------------|------------|
-| ~~Projektplanung~~              | ~~Architektur planen und Technologien festlegen. Datenbankstruktur skizzieren.~~                                                 | ~~0.5~~    |
-| ~~Projekt aufsetzen~~           | ~~Spring Boot und React Projekt erstellen. Ordnerstruktur und Dependencies einrichten.~~                                         | ~~1~~      |
-| ~~Datenbank aufsetzen~~         | ~~PostgreSQL installieren und konfigurieren. Tabellen für users, listings und images erstellen.~~                                | ~~1.5~~    |
-| ~~User Entity & Repository~~    | ~~Java Entity-Klassen für den User erstellen. JDBC Repository einrichten.~~                                                      | ~~1~~      |
-| ~~Registrierung Backend~~       | ~~Register-Endpunkt implementieren mit Salt generieren und bcrypt Hashing. Benutzername und Hash in DB speichern.~~              | ~~2~~      |
-| ~~Login Backend~~               | ~~Login-Endpunkt implementieren und Passwort mit Hash vergleichen. JWT-Token zurückgeben.~~                                      | ~~2~~      |
-| ~~Listing Entity & Repository~~ | ~~Java Entity für Inserate erstellen mit allen Feldern. JPA Repository und Service einrichten.~~                                 | ~~1~~      |
-| ~~Listing CRUD Backend~~        | ~~Endpunkte für erstellen, abrufen und löschen von Inseraten. Nur eingeloggte User dürfen inserieren.~~                          | ~~2~~      |
-| ~~Bild-Upload Backend~~         | ~~Multipart Endpunkt für Bild-Upload implementieren. Datei lokal speichern und Pfad in DB speichern.~~                           | ~~2~~      |
-| ~~API testen~~                  | ~~Alle Endpunkte mit Postman testen. Fehler beheben.~~                                                                           | ~~1~~      |
-| ~~Login & Register Frontend~~   | ~~Loginseite und Registrierungsseite in React bauen. Formular mit API verbinden.~~                                               | ~~2~~      |
-| ~~Navbar implementieren~~       | ~~Einfache Navigation mit Links erstellen. Eingeloggten User anzeigen.~~                                                         | ~~1~~      |
-| ~~Cards im Frontend~~           | ~~Post-Cards auf der Startseite implementieren. Bild, Name und Preis anzeigen.~~                                                 | ~~1.5~~    |
-| ~~Post erstellen Frontend~~     | ~~Formular für neue Poosts bauen. Alle Felder und Bild-Upload einbinden.~~                                                       | ~~2~~      |
-| ~~Detailseite Frontend~~        | ~~Einzelne Detailseite pro Inserat erstellen. Alle Infos und das Bild anzeigen.~~                                                | ~~1~~      |
-| Styling                         | Grundlegendes CSS für alle Seiten. Website übersichtlich und sauber gestalten.                                                   | 1.5        |
-| ~~Navigation verbessern~~       | ~~Die Navigation bei der Registrierung sollte verbessert werden, nach dem Registrieren direkt eingeloggt sein~~                  | ~~0.5~~    |
-| Verbesserungen                  | Verbesserungen von herr van essen implementieren                                                                                 | 1          |
-| User Profile hinzufügen         | Der User sollte seine eigene user Profile Page haben wo er username/passwort ändern kann und ein PB hinzufügen kann.             | 1.5        |
-| Anmeldung mit Email             | Man sollte sich auch mit seiner E-mail einloggen, statt nur mit dem username.                                                    | 0.5        |
-| Warenkorb                       | Falls man ein Inserat von andern kaufen will, kann man es in den Warenkorb tun. Wenn man es gekauft hat verschwindet das Inserat | 2          |
-| Letzter Test & Bugfixing        | Gesamte App durchklicken und Fehler beheben. Sicherstellen dass alles funktioniert.                                              | 1          |
-| Letzter Commit & Doku           | Code aufräumen und kommentieren. README schreiben und auf GitHub pushen.                                                         | 1          |
-| **Total**                       |                                                                                                                                  | **30.5 h** |
+| Name                             | Beschreibung                                                                                                                     | Zeit (h)   |
+|----------------------------------|----------------------------------------------------------------------------------------------------------------------------------|------------|
+| ~~Projektplanung~~               | ~~Architektur planen und Technologien festlegen. Datenbankstruktur skizzieren.~~                                                 | ~~0.5~~    |
+| ~~Projekt aufsetzen~~            | ~~Spring Boot und React Projekt erstellen. Ordnerstruktur und Dependencies einrichten.~~                                         | ~~1~~      |
+| ~~Datenbank aufsetzen~~          | ~~PostgreSQL installieren und konfigurieren. Tabellen für users, listings und images erstellen.~~                                | ~~1.5~~    |
+| ~~User Entity & Repository~~     | ~~Java Entity-Klassen für den User erstellen. JDBC Repository einrichten.~~                                                      | ~~1~~      |
+| ~~Registrierung Backend~~        | ~~Register-Endpunkt implementieren mit Salt generieren und bcrypt Hashing. Benutzername und Hash in DB speichern.~~              | ~~2~~      |
+| ~~Login Backend~~                | ~~Login-Endpunkt implementieren und Passwort mit Hash vergleichen. JWT-Token zurückgeben.~~                                      | ~~2~~      |
+| ~~Listing Entity & Repository~~  | ~~Java Entity für Inserate erstellen mit allen Feldern. JPA Repository und Service einrichten.~~                                 | ~~1~~      |
+| ~~Listing CRUD Backend~~         | ~~Endpunkte für erstellen, abrufen und löschen von Inseraten. Nur eingeloggte User dürfen inserieren.~~                          | ~~2~~      |
+| ~~Bild-Upload Backend~~          | ~~Multipart Endpunkt für Bild-Upload implementieren. Datei lokal speichern und Pfad in DB speichern.~~                           | ~~2~~      |
+| ~~API testen~~                   | ~~Alle Endpunkte mit Postman testen. Fehler beheben.~~                                                                           | ~~1~~      |
+| ~~Login & Register Frontend~~    | ~~Loginseite und Registrierungsseite in React bauen. Formular mit API verbinden.~~                                               | ~~2~~      |
+| ~~Navbar implementieren~~        | ~~Einfache Navigation mit Links erstellen. Eingeloggten User anzeigen.~~                                                         | ~~1~~      |
+| ~~Cards im Frontend~~            | ~~Post-Cards auf der Startseite implementieren. Bild, Name und Preis anzeigen.~~                                                 | ~~1.5~~    |
+| ~~Post erstellen Frontend~~      | ~~Formular für neue Poosts bauen. Alle Felder und Bild-Upload einbinden.~~                                                       | ~~2~~      |
+| ~~Detailseite Frontend~~         | ~~Einzelne Detailseite pro Inserat erstellen. Alle Infos und das Bild anzeigen.~~                                                | ~~1~~      |
+| Das wird im **BLOCK 6** gemacht: |
+| ~~Navigation verbessern~~        | ~~Die Navigation bei der Registrierung sollte verbessert werden, nach dem Registrieren direkt eingeloggt sein~~                  | ~~0.5~~    |
+| ~~Verbesserungen~~               | ~~Verbesserungen von herr van essen implementieren~~                                                                             | ~~1~~          |
+| User Profile hinzufügen          | Der User sollte seine eigene user Profile Page haben wo er username/passwort ändern kann und ein PB hinzufügen kann.             | 1.5        |
+| Anmeldung mit Email              | Man sollte sich auch mit seiner E-mail einloggen, statt nur mit dem username.                                                    | 0.5        |
+| Das wird im **BLOCK 7** gemacht: |
+| Warenkorb                        | Falls man ein Inserat von andern kaufen will, kann man es in den Warenkorb tun. Wenn man es gekauft hat verschwindet das Inserat | 2          |
+| Styling                          | Grundlegendes CSS für alle Seiten. Website übersichtlich und sauber gestalten.                                                   | 1.5        |
+| Profilbild                       | Man sollte, in seinem User Profil,  ein Profilbild hinzufügen können.                                                            | 0.5 |
+| Das wird im **BLOCK 8** gemacht: |
+| Letzter Test & Bugfixing         | Gesamte App durchklicken und Fehler beheben. Sicherstellen dass alles funktioniert.                                              | 1          |
+| Letzter Commit & Doku            | Code aufräumen und kommentieren. README schreiben und auf GitHub pushen.                                                         | 1          |
+| **Total**                        |                                                                                                                                  | **30.5 h** |
 
 ## Arbeitsjournal 
 | Datum      | Zeit (h)                                                                                      | Was wurde erledigt                                                                                                                                                                                                                                                                                                                   |
@@ -40,8 +44,8 @@
 | 12.06.2026 | 17:00-19:15<br/>19:20-21:45                                                                   | Ich habe angefangen an dem Bild-upload zu arbeiten.<br/>Ich habe angefangen meine API's zu testen und alle fehler zu beheben                                                                                                                                                                                                         |
 | 13.06.2026 | 17:00-18:30                                                                                   | Ich habe angefangen die Registrierung und das Login in meinem Frontend zu implementieren.                                                                                                                                                                                                                                            |
 | 15.06.2026 | 13:55-14:55<br/>14:55-15:30<br/>15:30-17:00<br/>17:00-17:35                                   | Kleine Einführung zum heutigen Tag gehabt, 2 Videos geschaut und meine Navabr implementiert.<br/> Ich habe nun die Implementation gebaut, dass all meien Posts auf der /listings seite sehen kann.<br/> Daran gearbeitet, dass man Posts erstellen kann, favorisieren kann und auf öffentlich/privat setzen kann<br/>Videos geschaut |
-| 22.06.2026 | 13:55-14:55                                  | Navigation verbessern                                                                                                                                                                                                                                                                                                                |
-| 29.06.2026 | 13:55-14:55                                  |                                                                                                                                                                                                                                                                                                                                      |
+| 22.06.2026 | 13:55-14:55<br/>14:55-15:55                                                                   | Navigation verbessern, sodass ich nach dem Registrieren direkt eingeloggt werde. <br/> Verbesserung's Vorschläge von Herr van essen implementiert (docker und env.exmple für besseres Testing)                                                                                                                                       |
+| 29.06.2026 | 13:55-14:55                                                                                   |                                                                                                                                                                                                                                                                                                                                      |
 
 ----------------------------------------------------------------------------------------------------------------
 # Projektplanung
@@ -147,6 +151,7 @@ VerkaufsPage/
 - git branch feature/listings
 - git branch feature/image-uploads
 - git branch feature/frontend
+- git branch feature/verbesserungen
 
 ## Branch Startegie: 
 | Name                  | Beschreibung                                                                                                  
@@ -157,6 +162,7 @@ VerkaufsPage/
 | feature/listings      | Inserate CRUD Operatoren                                        
 | feature/image-uploads | bild upload
 | feature/frontend      | Alle react Seiten 
+| feature/verbesserungen| Verbesserungen welche von Herr van Essen erwähnt worden
 
 ----------------------------------------------------------------------------------------------------------------
 
@@ -546,6 +552,7 @@ Der `FavoriteHandler` hatte keine CORS-Header gesetzt, wodurch der Browser alle 
 **Fix:** In `CorsUtil.java` `.add()` durch `.set()` ersetzt, damit der Header nur einmal gesetzt wird.
 
 ----------------------------------------------------------------------------------------------------------------
+
 # Navigation – Registrierung
 
 <p> Nach der Registrierung wird der User automatisch eingeloggt und direkt auf `/listings` weitergeleitet.</p>
@@ -556,3 +563,56 @@ Der `FavoriteHandler` hatte keine CORS-Header gesetzt, wodurch der Browser alle 
 3. Automatisch wird per `POST /login` eingeloggt
 4. JWT-Token, Username, Rolle und UserId werden im `localStorage` gespeichert
 5. User wird direkt auf `/listings` weitergeleitet
+
+----------------------------------------------------------------------------------------------------------------
+
+# Setup
+
+## Voraussetzungen
+- Java 17+
+- Node.js 18+
+- Docker Desktop
+
+## Docker Desktop installieren
+1. Gehe auf [docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop/)
+2. Lade die Windows Version herunter
+3. Installiere es mit den Standardeinstellungen
+4. PC neu starten
+5. Docker Desktop öffnen und warten bis der grüne Punkt unten links erscheint
+
+## Datenbank starten
+<p> Die Datenbank läuft in einem Docker Container. Starte sie mit: </p>
+
+```bash
+docker-compose up -d
+```
+
+<p>Alle Tabellen werden automatisch beim ersten Start erstellt.</p>
+
+## Umgebungsvariablen
+<p> Kopiere `.env.example` zu `.env` und fülle die Werte aus: </p>
+
+```bash
+cp .env.example .env
+```
+
+<p> Fülle folgende Werte in der `.env` Datei aus: </p>
+
+```bash
+DB_URL=jdbc:postgresql://localhost:5432/kleidungsshop
+DB_USER=postgres
+DB_PASSWORD=your_password_here
+PEPPER=your_pepper_here
+JWT_SECRET=your_jwt_secret_here_min_32_characters
+```
+
+## Backend starten
+<p> Öffne das Projekt in IntelliJ und starte `Main.java`. </p>
+
+## Frontend starten
+```bash
+cd frontend
+npm install
+npm start
+```
+----------------------------------------------------------------------------------------------------------------
