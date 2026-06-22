@@ -31,8 +31,7 @@ public class AuthService {
         String passwordWithSaltAndPepper = password + salt + PEPPER;
         String hash = BCrypt.withDefaults().hashToString(12, passwordWithSaltAndPepper.toCharArray());
 
-        User user = new User(0, username, email, salt, hash, "user");
-        userRepository.save(user);
+        User user = new User(0, username, email, salt, hash, "user", null);        userRepository.save(user);
     }
 
     public String login(String usernameOrEmail, String password) throws SQLException {
