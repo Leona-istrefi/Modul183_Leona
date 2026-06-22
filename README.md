@@ -25,7 +25,7 @@
 | ~~Navigation verbessern~~        | ~~Die Navigation bei der Registrierung sollte verbessert werden, nach dem Registrieren direkt eingeloggt sein~~                  | ~~0.5~~    |
 | ~~Verbesserungen~~               | ~~Verbesserungen von herr van essen implementieren~~                                                                             | ~~1~~          |
 | User Profile hinzufügen          | Der User sollte seine eigene user Profile Page haben wo er username/passwort ändern kann und ein PB hinzufügen kann.             | 1.5        |
-| Anmeldung mit Email              | Man sollte sich auch mit seiner E-mail einloggen, statt nur mit dem username.                                                    | 0.5        |
+| ~~Anmeldung mit Email~~              | ~~Man sollte sich auch mit seiner E-mail einloggen, statt nur mit dem username.~~                                                    | ~~0.5~~        |
 | Das wird im **BLOCK 7** gemacht: |
 | Warenkorb                        | Falls man ein Inserat von andern kaufen will, kann man es in den Warenkorb tun. Wenn man es gekauft hat verschwindet das Inserat | 2          |
 | Styling                          | Grundlegendes CSS für alle Seiten. Website übersichtlich und sauber gestalten.                                                   | 1.5        |
@@ -616,3 +616,13 @@ npm install
 npm start
 ```
 ----------------------------------------------------------------------------------------------------------------
+
+# Anmeldung mit Email oder Username
+
+<p> User können sich mit ihrem Username als auch mit ihrer Email einloggen. </p>
+
+## Ablauf
+1. User gibt Username oder Email und Passwort ein
+2. Backend sucht zuerst per Username in der Datenbank
+3. Falls kein User gefunden, wird per Email gesucht
+4. Bei Erfolg wird ein JWT-Token zurückgegeben

@@ -35,9 +35,15 @@ public class AuthService {
         userRepository.save(user);
     }
 
-    public String login(String username, String password) throws SQLException {
-        System.out.println("Login versucht für: " + username);
-        User user = userRepository.findByUsername(username);
+    public String login(String usernameOrEmail, String password) throws SQLException {
+        System.out.println("Login versucht für: " + usernameOrEmail);
+
+        User user = userRepository.findByUsername(usernameOrEmail);
+
+        if (user == null) {
+            user = userRepository.findByEmail(usernameOrEmail);
+        }
+
         System.out.println("User gefunden: " + (user != null));
         if (user == null) return null;
 
@@ -53,8 +59,8 @@ public class AuthService {
 
         System.out.println("Erstelle JWT Token...");
         return Jwts.builder()
-                .setSubject(username)
-                .claim("role", userRepository.findByUsername(username).getRole())
+                .setSubject(user.getUsername())
+                .claim("role", user.getRole())
                 .claim("userId", user.getId())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 86400000))

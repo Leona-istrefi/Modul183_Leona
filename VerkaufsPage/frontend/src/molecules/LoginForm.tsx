@@ -45,7 +45,7 @@ const LoginForm = () => {
             <div className="form-card">
                 <h2>Login</h2>
                 <ErrorMessage message={error} />
-                <Input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+                <Input type="text" placeholder="Username oder Email" value={username} onChange={(e) => setUsername(e.target.value)} />
                 <Input type="password" placeholder="Passwort" value={password} onChange={(e) => setPassword(e.target.value)} />
                 <Button label="Einloggen" onClick={handleLogin} />
                 <p className="form-footer">Noch kein Konto? <a href="/register">Registrieren</a></p>

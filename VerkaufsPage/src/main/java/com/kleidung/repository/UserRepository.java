@@ -41,4 +41,24 @@ public class UserRepository {
         }
         return null;
     }
+
+    public User findByEmail(String email) throws SQLException {
+        String sql = "SELECT * FROM users WHERE email = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return new User(
+                        rs.getInt("id"),
+                        rs.getString("username"),
+                        rs.getString("email"),
+                        rs.getString("salt"),
+                        rs.getString("password_hash"),
+                        rs.getString("role")
+                );
+            }
+        }
+        return null;
+    }
 }
