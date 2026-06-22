@@ -15,6 +15,7 @@ public class Main {
         server.createContext("/listings", new ListingHandler());
         server.createContext("/uploads", new StaticFileHandler());
         server.createContext("/favorites", new FavoriteHandler());
+        server.createContext("/profile", new ProfileHandler());
         server.start();
         System.out.println("Server läuft auf Port 8080");
     }
