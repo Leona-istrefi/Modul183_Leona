@@ -5,6 +5,7 @@ import Register from './pages/Register';
 import Navbar from './molecules/Navbar';
 import Listings from "./pages/Listings";
 import Favorites from "./pages/Favorites";
+import Profile from "./pages/Profile";
 
 const AppContent = () => {
     const location = useLocation();
@@ -19,6 +20,7 @@ const AppContent = () => {
                 <Route path="/register" element={<Register />} />
                 <Route path="/listings" element={<Listings />} />
                 <Route path="/favorites" element={<Favorites />} />
+                <Route path="/profile" element={<Profile />} />
             </Routes>
         </>
     );

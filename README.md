@@ -24,12 +24,13 @@
 | Das wird im **BLOCK 6** gemacht: |
 | ~~Navigation verbessern~~        | ~~Die Navigation bei der Registrierung sollte verbessert werden, nach dem Registrieren direkt eingeloggt sein~~                  | ~~0.5~~    |
 | ~~Verbesserungen~~               | ~~Verbesserungen von herr van essen implementieren~~                                                                             | ~~1~~      |
-| ~~User Profile hinzufügen~~          | ~~Der User sollte seine eigene user Profile Page haben wo er username/passwort ändern kann und ein PB hinzufügen kann.~~         | ~~1.5~~    |
-| ~~Anmeldung mit Email~~              | ~~Man sollte sich auch mit seiner E-mail einloggen, statt nur mit dem username.~~                                                | ~~0.5~~    |
+| ~~User Profile hinzufügen~~      | ~~Der User sollte seine eigene user Profile Page haben wo er username/passwort ändern kann und ein PB hinzufügen kann.~~         | ~~1.5~~    |
+| ~~Anmeldung mit Email~~          | ~~Man sollte sich auch mit seiner E-mail einloggen, statt nur mit dem username.~~                                                | ~~0.5~~    |
 | Das wird im **BLOCK 7** gemacht: |
 | Warenkorb                        | Falls man ein Inserat von andern kaufen will, kann man es in den Warenkorb tun. Wenn man es gekauft hat verschwindet das Inserat | 2          |
 | Styling                          | Grundlegendes CSS für alle Seiten. Website übersichtlich und sauber gestalten.                                                   | 1.5        |
 | Profilbild                       | Man sollte, in der Navbar, sein Profilbild sehen.                                                                                | 0.5        |
+| Validierung                      | beim registrieren sollte alles pflichtangaben sein. Beim ändern von passwort oder benutzername, darf es nicht derselbe username oder dasselbe passwort sein | 0.5        |
 | Das wird im **BLOCK 8** gemacht: |
 | Letzter Test & Bugfixing         | Gesamte App durchklicken und Fehler beheben. Sicherstellen dass alles funktioniert.                                              | 1          |
 | Letzter Commit & Doku            | Code aufräumen und kommentieren. README schreiben und auf GitHub pushen.                                                         | 1          |
@@ -44,8 +45,8 @@
 | 12.06.2026 | 17:00-19:15<br/>19:20-21:45                                                                   | Ich habe angefangen an dem Bild-upload zu arbeiten.<br/>Ich habe angefangen meine API's zu testen und alle fehler zu beheben                                                                                                                                                                                                         |
 | 13.06.2026 | 17:00-18:30                                                                                   | Ich habe angefangen die Registrierung und das Login in meinem Frontend zu implementieren.                                                                                                                                                                                                                                            |
 | 15.06.2026 | 13:55-14:55<br/>14:55-15:30<br/>15:30-17:00<br/>17:00-17:35                                   | Kleine Einführung zum heutigen Tag gehabt, 2 Videos geschaut und meine Navabr implementiert.<br/> Ich habe nun die Implementation gebaut, dass all meien Posts auf der /listings seite sehen kann.<br/> Daran gearbeitet, dass man Posts erstellen kann, favorisieren kann und auf öffentlich/privat setzen kann<br/>Videos geschaut |
-| 22.06.2026 | 13:55-14:55<br/>14:55-15:55<br/>15:55-16:25<br/>16:25-17:35                                   | Navigation verbessern, sodass ich nach dem Registrieren direkt eingeloggt werde. <br/> Verbesserung's Vorschläge von Herr van essen implementiert (docker und env.exmple für besseres Testing)<br/>Meinen code so umgeschriebeen, dass man sich jetzt auch mit der email anmelden kann.<br/>Jetzt gibt es eine "Profile User" page.  |
-| 29.06.2026 | 13:55-14:55                                                                                   |                                                                                                                                                                                                                                                                                                                                      |
+| 22.06.2026 | 13:55-14:55<br/>14:55-15:55<br/>15:55-16:25<br/>16:25-17:35                                   | Navigation verbessern, sodass ich nach dem Registrieren direkt eingeloggt werde. <br/> Verbesserung's Vorschläge von Herr van essen implementiert (docker und env.exmple für besseres Testing)<br/>Meinen code so umgeschriebeen, dass man sich jetzt auch mit der email anmelden kann.<br/>Eine "Profile User" page erstellt.       |
+| 29.06.2026 |                                                                                    |                                                                                                                                                                                                                                                                                                                                      |
 
 ----------------------------------------------------------------------------------------------------------------
 # Projektplanung
@@ -626,3 +627,23 @@ npm start
 2. Backend sucht zuerst per Username in der Datenbank
 3. Falls kein User gefunden, wird per Email gesucht
 4. Bei Erfolg wird ein JWT-Token zurückgegeben
+
+----------------------------------------------------------------------------------------------------------------
+
+## User Profil
+<p> Jeder eingeloggte User hat eine eigene Profilseite.</p>
+
+## Angezeigte Informationen
+- Profilbild (oder Initiale als Platzhalter)
+- Aktueller Username
+- Aktuelles Passwort
+
+## Endpunkte
+- `GET /profile` – Profildaten abrufen (Username und Profilbild)
+- `PUT /profile` – Username oder Passwort ändern
+- `POST /profile` – Profilbild hochladen
+
+## Datenbank
+<p> Die Tabelle `users` hat eine Spalte `profile_picture` die den Dateipfad des Profilbilds speichert. </p>
+
+----------------------------------------------------------------------------------------------------------------
