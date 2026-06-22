@@ -24,7 +24,7 @@ const Navbar = () => {
                 )}
                 {token ? (
                     <>
-                        <span className="navbar-user">Eingeloggt als {username}</span>
+                        <a href="/profile" className="navbar-user">Eingeloggt als {username}</a>
                         <button className="navbar-logout" onClick={handleLogout}>Logout</button>
                     </>
                 ) : (
