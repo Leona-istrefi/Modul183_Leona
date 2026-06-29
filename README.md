@@ -3,7 +3,7 @@
 
 username: admin<br>
 email: admin@test.com <br>
-passwort: admin.
+passwort: admin
 
 Alle anderen User müssen/sollen sie selbst erstellen für den ultimativen test. Danke!)
 
