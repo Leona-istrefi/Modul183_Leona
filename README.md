@@ -28,10 +28,10 @@
 | ~~Anmeldung mit Email~~          | ~~Man sollte sich auch mit seiner E-mail einloggen, statt nur mit dem username.~~                                                | ~~0.5~~    |
 | Das wird im **BLOCK 7** gemacht: |
 | ~~Warenkorb~~                        | ~~Falls man ein Inserat von andern kaufen will, kann man es in den Warenkorb tun. Wenn man es gekauft hat verschwindet das Inserat~~ | ~~2~~          |
-| Styling                          | Grundlegendes CSS für alle Seiten. Website übersichtlich und sauber gestalten.                                                   | 1.5        |
-| ~~Profilbild~~                       | ~~Man sollte, in der Navbar, sein Profilbild sehen.~~                                                                                | ~~0.5~~        |
+| ~~Styling~~                          | ~~Grundlegendes CSS für alle Seiten. Website übersichtlich und sauber gestalten.~~                                                 | ~~1.5~~        |
+| ~~Profilbild~~                       | ~~Man sollte, in der Navbar, sein Profilbild sehen.~~                                                                              | ~~0.5~~        |
 | ~~Validierung~~                      | ~~beim registrieren sollte alles pflichtangaben sein. Beim ändern von passwort oder benutzername, darf es nicht derselbe username oder dasselbe passwort sein~~ | ~~0.5~~        |
-| Letzter Test & Bugfixing         | Gesamte App durchklicken und Fehler beheben. Sicherstellen dass alles funktioniert.                                              | 1          |
+| ~~Letzter Test & Bugfixing~~         | ~~Gesamte App durchklicken und Fehler beheben. Sicherstellen dass alles funktioniert.~~                                              | ~~1~~          |
 | Letzter Commit & Doku            | Code aufräumen und kommentieren. README schreiben und auf GitHub pushen.                                                         | 1          |
 | **Total**                        |                                                                                                                                  | **30.5 h** |
 
@@ -45,7 +45,7 @@
 | 13.06.2026 | 17:00-18:30                                                                                   | Ich habe angefangen die Registrierung und das Login in meinem Frontend zu implementieren.                                                                                                                                                                                                                                            |
 | 15.06.2026 | 13:55-14:55<br/>14:55-15:30<br/>15:30-17:00<br/>17:00-17:35                                   | Kleine Einführung zum heutigen Tag gehabt, 2 Videos geschaut und meine Navabr implementiert.<br/> Ich habe nun die Implementation gebaut, dass all meien Posts auf der /listings seite sehen kann.<br/> Daran gearbeitet, dass man Posts erstellen kann, favorisieren kann und auf öffentlich/privat setzen kann<br/>Videos geschaut |
 | 22.06.2026 | 13:55-14:55<br/>14:55-15:55<br/>15:55-16:25<br/>16:25-17:35                                   | Navigation verbessern, sodass ich nach dem Registrieren direkt eingeloggt werde. <br/> Verbesserung's Vorschläge von Herr van essen implementiert (docker und env.exmple für besseres Testing)<br/>Meinen code so umgeschriebeen, dass man sich jetzt auch mit der email anmelden kann.<br/>Eine "Profile User" page erstellt.       |
-| 29.06.2026 | 13:55-14:55<br/>15:15-15:40<br/>15:40-16:05                                                   | Videos geschaut und an meinem Warenkorb gearbeitet<br/>Profilbild wird nun in der navbar angezeigt<br/>Validierung hinzugefügt                                                                                                                                                                                                       |
+| 29.06.2026 | 13:55-14:55<br/>15:15-15:40<br/>15:40-16:05<br/>16:05-16:35<br/>16:35-16:45                   | Videos geschaut und an meinem Warenkorb gearbeitet<br/>Profilbild wird nun in der navbar angezeigt<br/>Validierung hinzugefügt<br/>Alle px zu rem geändert im styling<br/>Durchgeklickt und nach grossen bugs gesucht                                                                                                                |
 
 ----------------------------------------------------------------------------------------------------------------
 # Projektplanung
@@ -691,3 +691,41 @@ Ein Klick auf das Bild führt zur Profilseite. </p>
 - Der neue Username darf nicht gleich wie der aktuelle sein
 - Das neue Passwort darf nicht gleich wie das aktuelle sein
 - Mindestens ein Feld muss ausgefüllt sein
+
+----------------------------------------------------------------------------------------------------------------
+# Styling
+<p> Das Frontend verwendet ausschliesslich `rem` Einheiten für alle Grössenangaben, um eine konsistente und skalierbare Darstellung zu gewährleisten. Die Basis-Schriftgrösse des Browsers (standardmässig 16px) dient als Referenz. </p>
+
+## Dateien
+- `global.css` – Globale Styles für Body, Links und Box-Sizing
+- `atoms.css` – Styles für Button, Input und Fehlermeldungen
+- `molecules.css` – Styles für alle zusammengesetzten Komponenten
+
+## Umrechnungsreferenz
+- `4px` → `0.25rem`
+- `8px` → `0.5rem`
+- `16px` → `1rem`
+- `32px` → `2rem`
+
+----------------------------------------------------------------------------------------------------------------
+# Letzter Test & Bugfixing
+<p>Die gesamte App wurde manuell durchgetestet. Alle Hauptfunktionen wurden überprüft und funktionieren korrekt. </p>
+
+## Getestete Funktionen
+- Registrierung mit Pflichtfeld-Validierung
+- Automatischer Login nach Registrierung
+- Login mit Username oder Email
+- Inserate anzeigen, erstellen, bearbeiten und löschen
+- Öffentliche und private Inserate
+- Bild-Upload bei Inseraten
+- Favoriten hinzufügen und entfernen
+- Warenkorb – Inserate hinzufügen, entfernen und kaufen
+- Profilseite – Username, Email, Passwort und Profilbild ändern
+- Profilbild in der Navbar
+- Admin kann alle Inserate bearbeiten und löschen
+- User kann nur eigene Inserate bearbeiten und löschen
+- Navbar – Links zu Inseraten, Favoriten, Warenkorb und Profil
+- Logout
+
+## Ergebnis
+Keine kritischen Fehler gefunden. Die App funktioniert stabil und alle Features verhalten sich wie erwartet.
