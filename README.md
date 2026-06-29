@@ -691,3 +691,18 @@ Ein Klick auf das Bild führt zur Profilseite. </p>
 - Der neue Username darf nicht gleich wie der aktuelle sein
 - Das neue Passwort darf nicht gleich wie das aktuelle sein
 - Mindestens ein Feld muss ausgefüllt sein
+
+----------------------------------------------------------------------------------------------------------------
+# Styling
+<p> Das Frontend verwendet ausschliesslich `rem` Einheiten für alle Grössenangaben, um eine konsistente und skalierbare Darstellung zu gewährleisten. Die Basis-Schriftgrösse des Browsers (standardmässig 16px) dient als Referenz. </p>
+
+## Dateien
+- `global.css` – Globale Styles für Body, Links und Box-Sizing
+- `atoms.css` – Styles für Button, Input und Fehlermeldungen
+- `molecules.css` – Styles für alle zusammengesetzten Komponenten
+
+## Umrechnungsreferenz
+- `4px` → `0.25rem`
+- `8px` → `0.5rem`
+- `16px` → `1rem`
+- `32px` → `2rem`
