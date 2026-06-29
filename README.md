@@ -1,10 +1,13 @@
 # Modul183_Leona
 (Falls sie es testen möchten und einen Docker installieren möchten, können sie das Setup dafür weiter unten finden. Es gibt bereits einen Admin user, falls Sie diesen ebenfalls testen möchten können Sie es hiermit machen: 
-username: admin
-email: admin@test.com
+
+username: admin<br>
+email: admin@test.com <br>
 passwort: admin.
 
 Alle anderen User müssen/sollen sie selbst erstellen für den ultimativen test. Danke!)
+
+
 ## Projektbeschreib
 <p> Ich mache eine Website wo man Kleider verkaufen kann. Man kann sich registrieren und einloggen. Die Passwörter werden sicher gespeichert mit Salt & Pepper. Das Backend mache ich mit Java und das Frontend mit TypeScript. In der Datenbank werden der Benutzername und das gehashte Passwort gespeichert. Wenn man eingeloggt ist kann man Kleider hochladen mit Name, Zustand, Grösse, Preis, Beschreibung und einem Bild.Ich mache eine Website wo man Kleider verkaufen kann. Man kann sich registrieren und einloggen. Die Passwörter werden sicher gespeichert mit Salt & Pepper und bcrypt. Das Backend mache ich mit Java und das Frontend mit TypeScript. In der Datenbank werden der Benutzername und das gehashte Passwort gespeichert. Wenn man eingeloggt ist kann man Kleider hochladen mit Name, Zustand, Grösse, Preis, Beschreibung und einem Bild. </p>
 
