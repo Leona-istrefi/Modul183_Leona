@@ -646,3 +646,29 @@ npm start
 <p> Die Tabelle `users` hat eine Spalte `profile_picture` die den Dateipfad des Profilbilds speichert. </p>
 
 ----------------------------------------------------------------------------------------------------------------
+
+# Warenkorb
+<p>Eingeloggte User können Inserate anderer User in den Warenkorb legen und kaufen.
+Nach dem Kauf verschwindet das Inserat aus der App.</p>
+
+## Funktionsweise
+- Im Detail-Modal eines fremden Inserats erscheint ein "In den Warenkorb" Button
+- Über das Warenkorb-Icon in der Navbar gelangt man zur Warenkorb-Seite
+- Dort kann man einzelne Inserate kaufen oder aus dem Warenkorb entfernen
+- Nach dem Kauf wird das Inserat aus der Datenbank gelöscht und verschwindet für alle
+
+## Datenbank
+<p>Eine neue Tabelle `cart` speichert die Verknüpfung zwischen `user_id` und `listing_id`.
+Eine `UNIQUE` Constraint verhindert doppelte Einträge.</p>
+
+## Endpunkte
+- `GET /cart` – Alle Inserate im Warenkorb abrufen
+- `POST /cart/{id}` – Inserat zum Warenkorb hinzufügen
+- `DELETE /cart/{id}` – Inserat aus Warenkorb entfernen
+- `POST /cart/{id}/buy` – Inserat kaufen und löschen
+
+## Berechtigungen
+- Nur eingeloggte User können den Warenkorb nutzen
+- Eigene Inserate können nicht in den Warenkorb gelegt werden
+
+----------------------------------------------------------------------------------------------------------------
