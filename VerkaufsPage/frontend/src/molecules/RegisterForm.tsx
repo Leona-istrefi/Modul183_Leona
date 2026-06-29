@@ -4,7 +4,13 @@ import Button from '../atoms/Button';
 import Input from '../atoms/Input';
 import ErrorMessage from '../atoms/ErrorMessage';
 import '../styles/molecules.css';
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from 'jwt-decode';
+
+interface DecodedToken {
+    sub: string;
+    role: string;
+    userId: number;
+}
 
 const RegisterForm = () => {
     const [username, setUsername] = useState('');
@@ -13,13 +19,22 @@ const RegisterForm = () => {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
 
-    interface DecodedToken {
-        sub: string;
-        role: string;
-        userId: number;
-    }
-
     const handleRegister = async () => {
+        if (!username || !email || !password) {
+            setError('Alle Felder sind Pflichtfelder');
+            return;
+        }
+
+        if (!email.includes('@')) {
+            setError('Ungültige Email-Adresse');
+            return;
+        }
+
+        if (password.length < 4) {
+            setError('Passwort muss mindestens 4 Zeichen haben');
+            return;
+        }
+
         try {
             const params = new URLSearchParams();
             params.append('username', username);

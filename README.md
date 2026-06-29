@@ -677,3 +677,17 @@ Eine `UNIQUE` Constraint verhindert doppelte Einträge.</p>
 <p> Statt "Eingeloggt als [username]" wird in der Navbar das Profilbild des Users angezeigt.
 Falls noch kein Profilbild hochgeladen wurde, wird die erste Initiale des Usernamens als Platzhalter angezeigt.
 Ein Klick auf das Bild führt zur Profilseite. </p>
+
+----------------------------------------------------------------------------------------------------------------
+# Validierung
+
+## Registrierung
+<p>Alle Felder (Username, Email, Passwort) sind Pflichtfelder.</p>
+- Email muss ein `@` enthalten
+- Passwort muss mindestens 4 Zeichen haben
+- Username und Email müssen einzigartig sein
+
+## Profil ändern
+- Der neue Username darf nicht gleich wie der aktuelle sein
+- Das neue Passwort darf nicht gleich wie das aktuelle sein
+- Mindestens ein Feld muss ausgefüllt sein
