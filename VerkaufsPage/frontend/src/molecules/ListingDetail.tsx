@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Button from '../atoms/Button';
 import Input from '../atoms/Input';
@@ -26,8 +26,9 @@ interface ListingDetailProps {
 const ListingDetail: React.FC<ListingDetailProps> = ({ listing, imageUrl, onClose, onDeleted, onUpdated }) => {
     const role = localStorage.getItem('role');
     const currentUserId = Number(localStorage.getItem('userId'));
-
-    const canEdit = role === 'admin' || listing.userId === currentUserId;
+    const token = localStorage.getItem('token');
+    const isOwnListing = listing.userId === currentUserId;
+    const canEdit = role === 'admin' || isOwnListing;
 
     const [isEditing, setIsEditing] = useState(false);
     const [name, setName] = useState(listing.name);
@@ -36,11 +37,21 @@ const ListingDetail: React.FC<ListingDetailProps> = ({ listing, imageUrl, onClos
     const [preis, setPreis] = useState(listing.preis.toString());
     const [beschreibung, setBeschreibung] = useState(listing.beschreibung);
     const [isPublic, setIsPublic] = useState(listing.isPublic);
+    const [inCart, setInCart] = useState(false);
     const [error, setError] = useState('');
+
+    useEffect(() => {
+        if (token && !isOwnListing) {
+            axios.get('http://localhost:8080/cart', {
+                headers: { Authorization: `Bearer ${token}` }
+            }).then(res => {
+                setInCart(res.data.some((l: any) => l.id === listing.id));
+            }).catch(() => {});
+        }
+    }, []);
 
     const handleDelete = async () => {
         try {
-            const token = localStorage.getItem('token');
             await axios.delete(`http://localhost:8080/listings/${listing.id}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
@@ -53,7 +64,6 @@ const ListingDetail: React.FC<ListingDetailProps> = ({ listing, imageUrl, onClos
 
     const handleUpdate = async () => {
         try {
-            const token = localStorage.getItem('token');
             const params = new URLSearchParams();
             params.append('name', name);
             params.append('zustand', zustand);
@@ -73,6 +83,17 @@ const ListingDetail: React.FC<ListingDetailProps> = ({ listing, imageUrl, onClos
             setIsEditing(false);
         } catch (e) {
             setError('Aktualisieren fehlgeschlagen');
+        }
+    };
+
+    const handleAddToCart = async () => {
+        try {
+            await axios.post(`http://localhost:8080/cart/${listing.id}`, null, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            setInCart(true);
+        } catch (e) {
+            setError('Fehler beim Hinzufügen zum Warenkorb');
         }
     };
 
@@ -113,6 +134,15 @@ const ListingDetail: React.FC<ListingDetailProps> = ({ listing, imageUrl, onClos
                         <p><strong>Grösse:</strong> {listing.groesse}</p>
                         <p><strong>Beschreibung:</strong> {listing.beschreibung}</p>
                         <p><strong>Sichtbarkeit:</strong> {listing.isPublic ? 'Öffentlich' : 'Privat'}</p>
+
+                        {token && !isOwnListing && (
+                            <div style={{ marginTop: '1rem' }}>
+                                <Button
+                                    label={inCart ? '✓ Im Warenkorb' : 'In den Warenkorb'}
+                                    onClick={handleAddToCart}
+                                />
+                            </div>
+                        )}
 
                         {canEdit && (
                             <div className="modal-actions">

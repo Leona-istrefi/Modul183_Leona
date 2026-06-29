@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaHeart } from 'react-icons/fa';
+import { FaHeart, FaShoppingCart } from 'react-icons/fa';
 import '../styles/molecules.css';
 
 const Navbar = () => {
@@ -18,9 +18,14 @@ const Navbar = () => {
             <div className="navbar-links">
                 <a href="/listings">Inserate</a>
                 {token && (
-                    <a href="/favorites" className="navbar-heart" title="Favoriten">
-                        <FaHeart />
-                    </a>
+                    <>
+                        <a href="/favorites" className="navbar-heart" title="Favoriten">
+                            <FaHeart />
+                        </a>
+                        <a href="/cart" className="navbar-heart" title="Warenkorb">
+                            <FaShoppingCart />
+                        </a>
+                    </>
                 )}
                 {token ? (
                     <>
