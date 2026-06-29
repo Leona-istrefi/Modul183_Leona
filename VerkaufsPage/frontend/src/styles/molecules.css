@@ -364,6 +364,34 @@
     }
 }
 
+.navbar-profile {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.navbar-profile-picture {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #4A90E2;
+}
+
+.navbar-profile-placeholder {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #4A90E2;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #357ABD;
+}
+
 @media (max-width: 480px) {
     .listings-grid {
         grid-template-columns: 1fr 1fr;
