@@ -1,17 +1,23 @@
 package com.kleidung;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    static void main() {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        IO.println(String.format("Hello and welcome!"));
+import com.kleidung.handler.*;
+import com.sun.net.httpserver.HttpServer;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            IO.println("i = " + i);
-        }
+import java.io.IOException;
+import java.net.InetSocketAddress;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
+        server.createContext("/register", new RegisterHandler());
+        server.createContext("/login", new LoginHandler());
+        server.createContext("/image", new ImageHandler());
+        server.createContext("/listings", new ListingHandler());
+        server.createContext("/uploads", new StaticFileHandler());
+        server.createContext("/favorites", new FavoriteHandler());
+        server.createContext("/profile", new ProfileHandler());
+        server.createContext("/cart", new CartHandler());
+        server.start();
+        System.out.println("Server läuft auf Port 8080");
     }
 }
