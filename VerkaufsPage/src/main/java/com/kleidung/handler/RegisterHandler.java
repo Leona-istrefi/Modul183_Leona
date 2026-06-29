@@ -18,6 +18,7 @@ public class RegisterHandler implements HttpHandler {
     public void handle(HttpExchange exchange) throws IOException {
         CorsUtil.addCorsHeaders(exchange);
         if (CorsUtil.handleOptions(exchange)) return;
+
         if (!exchange.getRequestMethod().equals("POST")) {
             exchange.sendResponseHeaders(405, -1);
             return;
@@ -25,24 +26,36 @@ public class RegisterHandler implements HttpHandler {
 
         InputStream is = exchange.getRequestBody();
         String body = new String(is.readAllBytes());
-        System.out.println("Body: " + body); // NEU
+        System.out.println("Body: " + body);
+
         String username = extractParam(body, "username");
         String email = extractParam(body, "email");
         String password = extractParam(body, "password");
 
+        if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
+            sendResponse(exchange, 400, "Alle Felder sind Pflichtfelder");
+            return;
+        }
+
+        if (!email.contains("@")) {
+            sendResponse(exchange, 400, "Ungültige Email-Adresse");
+            return;
+        }
+
+        if (password.length() < 4) {
+            sendResponse(exchange, 400, "Passwort muss mindestens 4 Zeichen haben");
+            return;
+        }
+
         try {
             authService.register(username, email, password);
-            String response = "Registrierung erfolgreich";
-            exchange.sendResponseHeaders(200, response.length());
-            OutputStream os = exchange.getResponseBody();
-            os.write(response.getBytes());
-            os.close();
+            sendResponse(exchange, 200, "Registrierung erfolgreich");
         } catch (SQLException e) {
-            String response = "Fehler: " + e.getMessage();
-            exchange.sendResponseHeaders(500, response.length());
-            OutputStream os = exchange.getResponseBody();
-            os.write(response.getBytes());
-            os.close();
+            if (e.getMessage().contains("unique") || e.getMessage().contains("duplicate")) {
+                sendResponse(exchange, 409, "Username oder Email bereits vergeben");
+            } else {
+                sendResponse(exchange, 500, "Fehler: " + e.getMessage());
+            }
         }
     }
 

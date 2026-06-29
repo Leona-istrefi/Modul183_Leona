@@ -71,26 +71,54 @@ public class ProfileHandler implements HttpHandler {
         try {
             String body = new String(exchange.getRequestBody().readAllBytes());
             String newUsername = extractParam(body, "username");
+            String newEmail = extractParam(body, "email");
             String newPassword = extractParam(body, "password");
 
-            if (!newUsername.isEmpty()) {
-                userRepository.updateUsername(userId, newUsername);
+            User currentUser = userRepository.findById(userId);
+            if (currentUser == null) {
+                sendError(exchange, 404, "User nicht gefunden");
+                return;
             }
+
+            String pepper = io.github.cdimascio.dotenv.Dotenv.load().get("PEPPER");
+
+            // Prüfen ob neuer Username gleich wie aktueller
+            if (!newUsername.isEmpty() && newUsername.equals(currentUser.getUsername())) {
+                sendError(exchange, 400, "Neuer Username ist gleich wie der aktuelle");
+                return;
+            }
+
+            // Prüfen ob neues Passwort gleich wie aktuelles
+            if (!newPassword.isEmpty()) {
+                BCrypt.Result result = BCrypt.verifyer().verify(
+                        (newPassword + currentUser.getSalt() + pepper).toCharArray(),
+                        currentUser.getPasswordHash()
+                );
+                if (result.verified) {
+                    sendError(exchange, 400, "Neues Passwort ist gleich wie das aktuelle");
+                    return;
+                }
+            }
+
+            if (!newUsername.isEmpty()) userRepository.updateUsername(userId, newUsername);
+            if (!newEmail.isEmpty()) userRepository.updateEmail(userId, newEmail);
 
             if (!newPassword.isEmpty()) {
                 SecureRandom random = new SecureRandom();
                 byte[] saltBytes = new byte[16];
                 random.nextBytes(saltBytes);
                 String newSalt = Base64.getEncoder().encodeToString(saltBytes);
-
-                String pepper = io.github.cdimascio.dotenv.Dotenv.load().get("PEPPER");
                 String hash = BCrypt.withDefaults().hashToString(12, (newPassword + newSalt + pepper).toCharArray());
                 userRepository.updatePassword(userId, newSalt, hash);
             }
 
             sendResponse(exchange, 200, "Profil aktualisiert");
         } catch (SQLException e) {
-            sendError(exchange, 500, "Fehler: " + e.getMessage());
+            if (e.getMessage().contains("unique") || e.getMessage().contains("duplicate")) {
+                sendError(exchange, 409, "Username bereits vergeben");
+            } else {
+                sendError(exchange, 500, "Fehler: " + e.getMessage());
+            }
         }
     }
 

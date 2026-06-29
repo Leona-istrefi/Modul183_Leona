@@ -7,7 +7,9 @@ import '../styles/molecules.css';
 
 const Profile = () => {
     const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [newUsername, setNewUsername] = useState('');
+    const [newEmail, setNewEmail] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [profilePicture, setProfilePicture] = useState<string | null>(null);
     const [image, setImage] = useState<File | null>(null);
@@ -25,6 +27,7 @@ const Profile = () => {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setUsername(response.data.username);
+            setEmail(response.data.email);
             setProfilePicture(response.data.profilePicture
                 ? `http://localhost:8080/${response.data.profilePicture}`
                 : null);
@@ -34,9 +37,15 @@ const Profile = () => {
     };
 
     const handleUpdate = async () => {
+        if (!newUsername && !newEmail && !newPassword) {
+            setError('Bitte mindestens ein Feld ausfüllen');
+            return;
+        }
+
         try {
             const params = new URLSearchParams();
             if (newUsername) params.append('username', newUsername);
+            if (newEmail) params.append('email', newEmail);
             if (newPassword) params.append('password', newPassword);
 
             await axios.put('http://localhost:8080/profile', params, {
@@ -49,14 +58,18 @@ const Profile = () => {
             if (newUsername) {
                 localStorage.setItem('username', newUsername);
                 setUsername(newUsername);
+                setNewUsername('');
+            }
+            if (newEmail) {
+                setEmail(newEmail);
+                setNewEmail('');
             }
 
             setSuccess('Profil aktualisiert!');
             setError('');
-            setNewUsername('');
             setNewPassword('');
-        } catch (e) {
-            setError('Fehler beim Aktualisieren');
+        } catch (e: any) {
+            setError('Fehler: ' + (e.response?.data || e.message));
         }
     };
 
@@ -71,6 +84,7 @@ const Profile = () => {
                 }
             });
             setSuccess('Profilbild hochgeladen!');
+            setImage(null);
             loadProfile();
         } catch (e) {
             setError('Fehler beim Hochladen des Profilbilds');
@@ -96,21 +110,30 @@ const Profile = () => {
                         accept="image/*"
                         onChange={(e) => setImage(e.target.files ? e.target.files[0] : null)}
                     />
-                    <Button label="Bild hochladen" onClick={handleProfilePicture} />
+                    {image && <Button label="Bild hochladen" onClick={handleProfilePicture} />}
                 </div>
 
                 <ErrorMessage message={error} />
                 <ErrorMessage message={success} type="success" />
 
-                <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.9rem' }}>
-                    Aktueller Username: <strong>{username}</strong>
-                </p>
+                <div className="profile-info">
+                    <p><strong>Username:</strong> {username}</p>
+                    <p><strong>Email:</strong> {email}</p>
+                </div>
+
+                <h3 style={{ fontSize: '1rem', fontWeight: 500, marginTop: '0.5rem' }}>Ändern</h3>
 
                 <Input
                     type="text"
                     placeholder="Neuer Username"
                     value={newUsername}
                     onChange={(e) => setNewUsername(e.target.value)}
+                />
+                <Input
+                    type="email"
+                    placeholder="Neue Email"
+                    value={newEmail}
+                    onChange={(e) => setNewEmail(e.target.value)}
                 />
                 <Input
                     type="password"

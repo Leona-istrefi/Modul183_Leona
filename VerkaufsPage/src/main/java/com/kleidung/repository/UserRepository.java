@@ -86,6 +86,16 @@ public class UserRepository {
         }
     }
 
+    public void updateEmail(int id, String newEmail) throws SQLException {
+        String sql = "UPDATE users SET email = ? WHERE id = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, newEmail);
+            stmt.setInt(2, id);
+            stmt.executeUpdate();
+        }
+    }
+
     private User mapRow(ResultSet rs) throws SQLException {
         return new User(
                 rs.getInt("id"),
