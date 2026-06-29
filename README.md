@@ -32,7 +32,7 @@
 | ~~Profilbild~~                       | ~~Man sollte, in der Navbar, sein Profilbild sehen.~~                                                                              | ~~0.5~~        |
 | ~~Validierung~~                      | ~~beim registrieren sollte alles pflichtangaben sein. Beim ändern von passwort oder benutzername, darf es nicht derselbe username oder dasselbe passwort sein~~ | ~~0.5~~        |
 | ~~Letzter Test & Bugfixing~~         | ~~Gesamte App durchklicken und Fehler beheben. Sicherstellen dass alles funktioniert.~~                                              | ~~1~~          |
-| Letzter Commit & Doku            | Code aufräumen und kommentieren. README schreiben und auf GitHub pushen.                                                         | 1          |
+| ~~Letzter Commit & Doku~~            | ~~Code aufräumen und kommentieren. README schreiben und auf GitHub pushen.~~                                                         | ~~1~~          |
 | **Total**                        |                                                                                                                                  | **30.5 h** |
 
 ## Arbeitsjournal 
@@ -45,7 +45,7 @@
 | 13.06.2026 | 17:00-18:30                                                                                   | Ich habe angefangen die Registrierung und das Login in meinem Frontend zu implementieren.                                                                                                                                                                                                                                            |
 | 15.06.2026 | 13:55-14:55<br/>14:55-15:30<br/>15:30-17:00<br/>17:00-17:35                                   | Kleine Einführung zum heutigen Tag gehabt, 2 Videos geschaut und meine Navabr implementiert.<br/> Ich habe nun die Implementation gebaut, dass all meien Posts auf der /listings seite sehen kann.<br/> Daran gearbeitet, dass man Posts erstellen kann, favorisieren kann und auf öffentlich/privat setzen kann<br/>Videos geschaut |
 | 22.06.2026 | 13:55-14:55<br/>14:55-15:55<br/>15:55-16:25<br/>16:25-17:35                                   | Navigation verbessern, sodass ich nach dem Registrieren direkt eingeloggt werde. <br/> Verbesserung's Vorschläge von Herr van essen implementiert (docker und env.exmple für besseres Testing)<br/>Meinen code so umgeschriebeen, dass man sich jetzt auch mit der email anmelden kann.<br/>Eine "Profile User" page erstellt.       |
-| 29.06.2026 | 13:55-14:55<br/>15:15-15:40<br/>15:40-16:05<br/>16:05-16:35<br/>16:35-16:45                   | Videos geschaut und an meinem Warenkorb gearbeitet<br/>Profilbild wird nun in der navbar angezeigt<br/>Validierung hinzugefügt<br/>Alle px zu rem geändert im styling<br/>Durchgeklickt und nach grossen bugs gesucht                                                                                                                |
+| 29.06.2026 | 13:55-14:55<br/>15:15-15:40<br/>15:40-16:05<br/>16:05-16:35<br/>16:35-16:45<br/>16:45-17:15   | Videos geschaut und an meinem Warenkorb gearbeitet<br/>Profilbild wird nun in der navbar angezeigt<br/>Validierung hinzugefügt<br/>Alle px zu rem geändert im styling<br/>Durchgeklickt und nach grossen bugs gesucht<br/>ReadMe noch beabreitet, letzten Commit gemacht und letztes Video geschaut                                  |
 
 ----------------------------------------------------------------------------------------------------------------
 # Projektplanung
