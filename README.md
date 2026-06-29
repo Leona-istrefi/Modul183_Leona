@@ -50,44 +50,44 @@
 ----------------------------------------------------------------------------------------------------------------
 # Projektplanung
 
-## Kleidungsverkaufsportal 
+## Kleidungsverkaufsportal
 <p> Ich kreiere eine einfache Website wo man Kleider verkaufen kann. Man kann sich registrieren und einloggen. Das Backend ist mit Java (Maven) und das Frontend mit TypeScript (React). Passwörter werden sicher mit Salt & Pepper und bcrypt gespeichert.</p>
 
-## Technologiestack 
+## Technologiestack
 - **Frontend:** TypeScript, React
-- **Backend:** Java 26, Maven 
+- **Backend:** Java 26, Maven
 - **Datenbank:** PostgreSQL
-- **Sicherheit der Passwörter:** bcrpt, Salt & Pepper
+- **Sicherheit der Passwörter:** bcrypt, Salt & Pepper
 
-## Architektur 
-<p> Das Projekt is aufgeteilt in drei Teilen: </p>
+## Architektur
+<p> Das Projekt ist aufgeteilt in drei Teile: </p>
 
 - **Frontend** kommuniziert über REST-API mit dem Backend
 - **Backend** verwaltet die Logik, Authentifizierung und Datenbankzugriffe
-- **Datenbank** speichert Benutzer, Inserate und Bilder 
+- **Datenbank** speichert Benutzer, Inserate und Bilder
 
-## Datenbankstruktur 
-**users** 
+## Datenbankstruktur
+**users**
 - id, username, email, salt, password_hash
 
-**listings** 
+**listings**
 - id, user_id, name, zustand, grösse, preis, beschreibung
 
-**images** 
-- id, listening_id, filepath
+**images**
+- id, listing_id, filepath
 
-## Funktionen 
+## Funktionen
 - Registrierung und Login mit sicherer Passwortspeicherung
-- Inserat erstellen mit Name, Zustand, Grösse, Preis, Beschreibng und Bild 
-- Alle Inserate auf der Startseite anzeigen 
-- Detailseite pro Inserat 
+- Inserat erstellen mit Name, Zustand, Grösse, Preis, Beschreibung und Bild
+- Alle Inserate auf der Startseite anzeigen
+- Detailseite pro Inserat
 
-## Sicherheit 
+## Sicherheit
 <p> Passwörter werden mit einem zufälligen Salt und einem geheimen Pepper kombiniert und dann mit bcrypt gehasht. In der Datenbank wird nur der Hash und der Salt gespeichert, nie das Originalpasswort.</p>
 
 ----------------------------------------------------------------------------------------------------------------
 
-# Projekt aufsetzen 
+# Projekt aufsetzen
 
 ## Ordnerstruktur
 VerkaufsPage/
@@ -96,32 +96,32 @@ VerkaufsPage/
 - .mvn/
 
 - frontend/
-   - src/
-      - components/
-      - pages/
-      - App.tsx
-   - public/
-   - package.json
+    - src/
+        - components/
+        - pages/
+        - App.tsx
+    - public/
+    - package.json
 
 - src/
-   - main/
-      - java/
-         - com/
-            - kleidung/
-               - Main.java
-               - DatabaseConnection.java
+    - main/
+        - java/
+            - com/
+                - kleidung/
+                    - Main.java
+                    - DatabaseConnection.java
 
 - pom.xml
 - README.md
 
-## Backend (Plain Java mit maven)
-1. In dem IntelliJ, was mit dem Repo verbunden ist gehen wir auf File-> New -> Module
-2. Dort fülle ich folgender aus: 
-   - Name: VerkaufsPage
-   - JDK 26
-3. Danack klicke ich auf finish.
+## Backend (Plain Java mit Maven)
+1. In dem IntelliJ, was mit dem Repo verbunden ist, gehen wir auf File -> New -> Module
+2. Dort fülle ich folgendes aus:
+    - Name: VerkaufsPage
+    - JDK 26
+3. Danach klicke ich auf finish.
 
-<p> In meinem pom.xml file, dass nun erstellt wurde füge ich diese Dependencies dazu: </p>
+<p> In meinem pom.xml file, das nun erstellt wurde, füge ich diese Dependencies dazu: </p>
 <dependencies>
  <dependency>
         <groupId>org.postgresql</groupId>
@@ -139,39 +139,39 @@ VerkaufsPage/
 
 ## Frontend (React + TypeScript)
 1. Auf https://nodejs.org/ sich node.js herunterladen und danach installieren
-2. IntelliJ neu starten 
-3. Im Terminal auf cd VerkaufsPage/ wechseln und dort diese commands eingeben: 
-   - npx create-react-app frontend --template typescript
-   - cd frontend
-   - npm install axios react-router-dom
+2. IntelliJ neu starten
+3. Im Terminal auf cd VerkaufsPage/ wechseln und dort diese Commands eingeben:
+    - npx create-react-app frontend --template typescript
+    - cd frontend
+    - npm install axios react-router-dom
 
 ## Branches erstellen
-- git branch develop 
+- git branch develop
 - git branch feature/auth
 - git branch feature/listings
 - git branch feature/image-uploads
 - git branch feature/frontend
 - git branch feature/verbesserungen
 
-## Branch Startegie: 
+## Branch Strategie:
 | Name                  | Beschreibung                                                                                                  
 |-----------------------|---------------------------------------------------------------------------------------------------------------
 | main                  | Nur fertiger, funktionierender Code                                  
 | develop               | Hauptentwicklungsbranch                         
 | feature/auth          | Registrierung und Login                
 | feature/listings      | Inserate CRUD Operatoren                                        
-| feature/image-uploads | bild upload
-| feature/frontend      | Alle react Seiten 
+| feature/image-uploads | Bild Upload
+| feature/frontend      | Alle React Seiten 
 | feature/verbesserungen| Verbesserungen welche von Herr van Essen erwähnt worden
 
 ----------------------------------------------------------------------------------------------------------------
 
 # Datenbank aufsetzen
 ## PostgreSQL installieren
-1. ich ging auf https://www.postgresql.org/download/ und wählte windows aus
-2. ich habe den Installer heruntergeladen und gestartet 
-3. Ich habe alles auf Standard gelassen und mir mein **Passwort** gemerkt 
-4. Der port bleibt auf 5432
+1. Ich ging auf https://www.postgresql.org/download/ und wählte Windows aus
+2. Ich habe den Installer heruntergeladen und gestartet
+3. Ich habe alles auf Standard gelassen und mir mein **Passwort** gemerkt
+4. Der Port bleibt auf 5432
 
 ## Datenbank erstellen
 <p> Nach der Installation öffne ich **SQL Shell (psql)** und gebe folgendes ein. (Ich drücke bei allem Enter ausser beim Passwort):</p>
@@ -180,19 +180,19 @@ VerkaufsPage/
 - Database [postgres]:
 - Port [5432]:
 - Username [postgres]:
-- Password: meinPasswort"
+- Password: meinPasswort
 
-<p> Danach erstelle ich meine Datenbank namens kleidungsshop mit diesem command: </p>
+<p> Danach erstelle ich meine Datenbank namens kleidungsshop mit diesem Command: </p>
 
 ```sql
 CREATE DATABASE kleidungsshop;
 \c kleidungsshop
 ```
 
-<p> Nun create ich eine Tabelle für die users, listings und images, welche ich später brauchen werden. </p>
+<p> Nun erstelle ich eine Tabelle für die users, listings und images, welche ich später brauchen werde. </p>
 
 ```sql
---Tabelle für die users--
+-- Tabelle für die users --
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
@@ -202,7 +202,7 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
---Tabelle für die listings-- 
+-- Tabelle für die listings -- 
 CREATE TABLE listings (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id),
@@ -214,7 +214,7 @@ CREATE TABLE listings (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
---Tabelle für die iamges--
+-- Tabelle für die images --
 CREATE TABLE images (
     id SERIAL PRIMARY KEY,
     listing_id INT REFERENCES listings(id),
@@ -224,7 +224,7 @@ CREATE TABLE images (
 
 ----------------------------------------------------------------------------------------------------------------
 
-# User Entitiy klassen erstellen
+# User Entity Klassen erstellen
 ## Datenbankverbindung
 
 Die Datenbankverbindung wird in der Klasse `DatabaseConnection.java` verwaltet.
@@ -244,62 +244,62 @@ Connection conn = DatabaseConnection.getConnection();
 > **Wichtig:** Das Datenbankpasswort wird in einer `.env` Datei gespeichert und nie direkt im Code geschrieben. Die `.env` Datei ist in der `.gitignore` eingetragen und wird nicht auf GitHub gepusht.
 
 ----------------------------------------------------------------------------------------------------------------
- 
-# Registrierung im Backend 
+
+# Registrierung im Backend
 <p> Wenn sich ein User registriert, wird sein Passwort sicher gespeichert. Dafür wird ein zufälliger Salt generiert und zusammen mit einem geheimen Pepper mit bcrypt gehasht.</p>
 
 ## Ablauf
-1. User gibt Username, Email und Passwort ein 
-2. Ein zufälliger Salt wird generiert 
-3. Passwort wird mit Salt und Pepper kombiniert und mit bcrypt gehasht 
-4. Username, Salt und Hash werden in der Datenbank gespeichert 
+1. User gibt Username, Email und Passwort ein
+2. Ein zufälliger Salt wird generiert
+3. Passwort wird mit Salt und Pepper kombiniert und mit bcrypt gehasht
+4. Username, Salt und Hash werden in der Datenbank gespeichert
 5. Das Originalpasswort wird nie gespeichert
 
-## Sicherheit 
-- **Salt** wird zufälig pro User generiert und in der DB gespeichert 
-- **Pepper** ist ein geheimer Schlüssel der nur in der '.env' Datei steht
+## Sicherheit
+- **Salt** wird zufällig pro User generiert und in der DB gespeichert
+- **Pepper** ist ein geheimer Schlüssel der nur in der `.env` Datei steht
 - **bcrypt** ist der Hashing-Algorithmus
 
 ----------------------------------------------------------------------------------------------------------------
 
-# Login Endpunkt 
+# Login Endpunkt
 <p> Wenn sich ein User einloggt, wird das eingegebene Passwort mit dem gespeicherten Hash verglichen.
-Wenn das gelingt wird ein JWt Token zurückgegeben, dieser wird für weitere Anfragen verwendet.</p>
+Wenn das gelingt, wird ein JWT Token zurückgegeben, dieser wird für weitere Anfragen verwendet.</p>
 
-## Ablauf 
-1. User gibt Username und Passwort ein 
-2. User wird anhand vom Username aus der Datenbank geholt 
-3. Passwort wird mit Salt und Pepper kombiniert und mit bcrypt verglichen 
-4. Wenn das geht wird ein JWT Token generiert und zurückgegeben
-5. Wenn das nicht funktioniert wird ein 401 Fehler zurückgegeben
+## Ablauf
+1. User gibt Username und Passwort ein
+2. User wird anhand vom Username aus der Datenbank geholt
+3. Passwort wird mit Salt und Pepper kombiniert und mit bcrypt verglichen
+4. Wenn das geht, wird ein JWT Token generiert und zurückgegeben
+5. Wenn das nicht funktioniert, wird ein 401 Fehler zurückgegeben
 
-## Sicherheit 
-- **JWT-Token** ist 24h gültig 
-- **JWT-Secret** steht nur in der '.env' Datei 
+## Sicherheit
+- **JWT-Token** ist 24h gültig
+- **JWT-Secret** steht nur in der `.env` Datei
 - Das Originalpasswort wird nie gespeichert oder verglichen
 
 ----------------------------------------------------------------------------------------------------------------
 
 # Listing Entity und Repository
-<p> Ein Inserat enthält alle Informationen zu einem Kleidungsstück, welches zu verkauf bereit ist. Alle Daten der Inserate werden in der Datenbank gespeichert</p>
+<p> Ein Inserat enthält alle Informationen zu einem Kleidungsstück, welches zum Verkauf bereit ist. Alle Daten der Inserate werden in der Datenbank gespeichert.</p>
 
-## Felder 
-- **Name:** Name des Kleidungsstück
+## Felder
+- **Name:** Name des Kleidungsstücks
 - **Zustand:** Zustand vom Kleidungsstück (Gut, Schlecht, leicht beschädigt etc.)
 - **Grösse:** Grösse vom Kleidungsstück (S, M, L)
 - **Preis:** Preis in CHF
-- **Beschreibung:** Zusätziche beschreibung z.b. es ist von den 2000
+- **Beschreibung:** Zusätzliche Beschreibung z.B. es ist von den 2000ern
 
-## Repository Methoden 
-- 'save()' - Inserat in der Datenbank speichern 
-- 'findAll()'- Alle Inserate anzeigen lassen 
-- 'findById()' - Spezifisches Inserat suchen 
-- 'delete()' - Ein Inserat löschen
+## Repository Methoden
+- `save()` - Inserat in der Datenbank speichern
+- `findAll()` - Alle Inserate anzeigen lassen
+- `findById()` - Spezifisches Inserat suchen
+- `delete()` - Ein Inserat löschen
 
 ----------------------------------------------------------------------------------------------------------------
 
-# Endpunkte für die Inserate 
-<p> Alle meine Endpunkte für die Inserate sind unter '/listings' zu finden. Das erstellen und löschen von Inseraten ist nur für eingeloggte User erlaubt</p>
+# Endpunkte für die Inserate
+<p> Alle meine Endpunkte für die Inserate sind unter `/listings` zu finden. Das Erstellen und Löschen von Inseraten ist nur für eingeloggte User erlaubt.</p>
 
 ## Vorherige Fehler beheben
 <p> Mir ist aufgefallen, dass ich in der letzten Aufgabe keine "put/update" Methode implementiert hatte, weshalb ich dies nachgeholt habe.
@@ -309,190 +309,190 @@ Was ich auch bemerkt hatte, war, dass ich in meiner Datenbank Tabelle keine Zeil
 ALTER TABLE users ADD COLUMN role VARCHAR(20) DEFAULT 'user';
 ```
 
-## Endpunkte 
-- 'GET /listings' - Alle Inserate abrufen (man muss nicht eingeloggt sein)
-- 'POST /listings' - Neues Inserat erstellen (man muss eingeloggt sein)
-- 'PUT /listings{id}' - Inserat bearbeiten (man muss user oder admin sein)
-- 'DELETE /listings{id}' - Inserat löschen (man  muss user oder admin sein)
+## Endpunkte
+- `GET /listings` - Alle Inserate abrufen (man muss nicht eingeloggt sein)
+- `POST /listings` - Neues Inserat erstellen (man muss eingeloggt sein)
+- `PUT /listings/{id}` - Inserat bearbeiten (man muss User oder Admin sein)
+- `DELETE /listings/{id}` - Inserat löschen (man muss User oder Admin sein)
 
-## Berechtigungen 
-- **User:** kann nur seine eigenen Inserate löschen oder bearbeiten 
-- **Admin:** kann alle Inserate löschen oder bearbeiten 
+## Berechtigungen
+- **User:** kann nur seine eigenen Inserate löschen oder bearbeiten
+- **Admin:** kann alle Inserate löschen oder bearbeiten
 
-## Service Mehthoden 
-- 'create()' - Neues Inserat erstellen 
-- 'getAll()' - Alle Inserate aufrufen 
-- 'getById()' - Ein spezifisches Inserat aufrufen 
-- 'update()' - Ein Inserat bearbeiten 
-- 'delete()' - Ein Inserat löschen
+## Service Methoden
+- `create()` - Neues Inserat erstellen
+- `getAll()` - Alle Inserate aufrufen
+- `getById()` - Ein spezifisches Inserat aufrufen
+- `update()` - Ein Inserat bearbeiten
+- `delete()` - Ein Inserat löschen
 
-## Authentifizierung 
-<p> Für POST, PUT und DELETE muss ein JWT-Token im Header mitgeschickt werden</p>
+## Authentifizierung
+<p> Für POST, PUT und DELETE muss ein JWT-Token im Header mitgeschickt werden.</p>
 
-## Fehlercodes 
-- '401' - Nicht eingeloggt oder ungültiger Token 
-- '403' - Keine Berechtigung 
-- '404' - Das Inserat wurde nciht gefunden  
-- '505' - Fehler in der Datenbank/beim Speichern 
-
-----------------------------------------------------------------------------------------------------------------
-# Bild upload 
-<p> Bilder können pro Inserat hochgeladen werden. Die Datei wird lokal auf dem Server gespeichert</p>
-
-## Endpunkt 
-- 'POST/listings/{id}/image' - Bild für ein Inserat hochladen
-
-## Ablauf 
-- Bild wird als Datei im Request Body mitgeschickt 
-- Ein dateiname wird generiert 
-- Datei wird lokal im 'uploads/' Ordner gespeichert 
-- Dateipfad wird in der Datenbank gespeichert 
+## Fehlercodes
+- `401` - Nicht eingeloggt oder ungültiger Token
+- `403` - Keine Berechtigung
+- `404` - Das Inserat wurde nicht gefunden
+- `500` - Fehler in der Datenbank/beim Speichern
 
 ----------------------------------------------------------------------------------------------------------------
+# Bild Upload
+<p> Bilder können pro Inserat hochgeladen werden. Die Datei wird lokal auf dem Server gespeichert.</p>
 
-# API's testen
-<p> Alle Endpunkte wurden mit Postman getestet und alle Fehler wurden behoben</p>
+## Endpunkt
+- `POST /listings/{id}/image` - Bild für ein Inserat hochladen
 
-## Getestete Endpunkte 
-- 'POST /register' - Registrierung 
-- 'POST /login' - eingeloggt und den JWT Token erhalten 
-- 'GET /listings' - Alle Inserate abgerufen
-- 'POST /listings' - Inserat erstellt 
-- 'PUT /listings/{id}' - Inserat bearbeitet
-- 'POST /image/{id}' - Bild hochladen
-- 'DELETE /listings/{id}' - Inserat löschen
+## Ablauf
+- Bild wird als Datei im Request Body mitgeschickt
+- Ein Dateiname wird generiert
+- Datei wird lokal im `uploads/` Ordner gespeichert
+- Dateipfad wird in der Datenbank gespeichert
 
-## Authentifizierung in postman 
-<p> Der JWT Token wurde vom Login kopiert und bei den geschützten Endpunkten im Header mitgeschickt</p>
+----------------------------------------------------------------------------------------------------------------
 
-## Gefundene Fehler und die Fixes 
+# APIs testen
+<p> Alle Endpunkte wurden mit Postman getestet und alle Fehler wurden behoben.</p>
+
+## Getestete Endpunkte
+- `POST /register` - Registrierung
+- `POST /login` - Eingeloggt und den JWT Token erhalten
+- `GET /listings` - Alle Inserate abgerufen
+- `POST /listings` - Inserat erstellt
+- `PUT /listings/{id}` - Inserat bearbeitet
+- `POST /image/{id}` - Bild hochladen
+- `DELETE /listings/{id}` - Inserat löschen
+
+## Authentifizierung in Postman
+<p> Der JWT Token wurde vom Login kopiert und bei den geschützten Endpunkten im Header mitgeschickt.</p>
+
+## Gefundene Fehler und die Fixes
 **1. .env Datei nicht gefunden**
-<p> Der Server hat meine '.env' Datei nicht gefunden, weil das Working Directory falsch war. </p>
+<p> Der Server hat meine `.env` Datei nicht gefunden, weil das Working Directory falsch war. </p>
 
 **Fix**
-<p> Ich ging auf -> Run -> Edit Configuration -> Add new Configuration -> Application, Main. und danach dort alle Informationen eingegeben. </p>
+<p> Ich ging auf -> Run -> Edit Configuration -> Add new Configuration -> Application, Main und danach dort alle Informationen eingegeben. </p>
 
-**2. URL Endcoded Parameter mit Leerzeichen**
-<p> Postman at die Keys mit '%20' am Ende geschickt (bsp: 'username%20=testuser'), weshalb die Parameter nicht gelesen wurden.
+**2. URL Encoded Parameter mit Leerzeichen**
+<p> Postman hat die Keys mit `%20` am Ende geschickt (bsp: `username%20=testuser`), weshalb die Parameter nicht gelesen wurden.</p>
 
 **Fix**
-<p> In der 'extractParam' Mehode 'URLDecoder.decode()' und '.trim()' auf den Key angewendet</p>
+<p> In der `extractParam` Methode `URLDecoder.decode()` und `.trim()` auf den Key angewendet.</p>
 
 **3. JWT Token hängt den Server auf**
-<p> Die alte 'jjtw' version war nicht kompatibel mit Java 26 und hat den Server zum Absturz gebracht.</p>
+<p> Die alte `jjwt` Version war nicht kompatibel mit Java 26 und hat den Server zum Absturz gebracht.</p>
 
 **Fix**
-<p> Die Dependency gewechselt und die API entsprechend angepasst</p>
+<p> Die Dependency gewechselt und die API entsprechend angepasst.</p>
 
-**4. Inserat löschen schlug fehl wegen dem Fremdschlüssel** 
-<p> Ein Inserat konnte nicht gelöscht werden, weil noch ein Bild in der 'images' Tabelle drauf war</p>
-
-**Fix** 
-<p> In der 'ListingRepository.delete()' werden alle Bilder vom Inserat gelöscht, danach das Inserat selbst.</p>
-
-**5. Image Hanlder wurde nicht aufgerufen**
-<p> Der Context '/listings' hat alle Anfragen abgefangen, auch '/listings/{id}/image'.</p>
+**4. Inserat löschen schlug fehl wegen dem Fremdschlüssel**
+<p> Ein Inserat konnte nicht gelöscht werden, weil noch ein Bild in der `images` Tabelle darauf war.</p>
 
 **Fix**
-<p> Den Image Endpunkt auf '/image/{id}' geändert und vor '/listings' registriert </p>
+<p> In der `ListingRepository.delete()` werden alle Bilder vom Inserat gelöscht, danach das Inserat selbst.</p>
+
+**5. Image Handler wurde nicht aufgerufen**
+<p> Der Context `/listings` hat alle Anfragen abgefangen, auch `/listings/{id}/image`.</p>
+
+**Fix**
+<p> Den Image Endpunkt auf `/image/{id}` geändert und vor `/listings` registriert.</p>
 
 **6. Too many bytes to write to stream**
-<p> Die Response Länge wurde mit 'message.length()' berechnet, was bei Sonderzeichen falsch war.</p>
+<p> Die Response Länge wurde mit `message.length()` berechnet, was bei Sonderzeichen falsch war.</p>
 
 **Fix**
-<p> Überall 'message.getBytes("UFT-8")' verwendet und 'bytes.length' für die Header-Länge gesetzt.</p>
+<p> Überall `message.getBytes("UTF-8")` verwendet und `bytes.length` für die Header-Länge gesetzt.</p>
 
-## Postman Collection 
+## Postman Collection
 <p> Die Postman Collection mit allen Tests ist im Repository zu finden und kann direkt in Postman importiert werden.</p>
 
 ----------------------------------------------------------------------------------------------------------------
 
 # Login und Registrierung im Frontend
-<p> Ich habe das Login und die Registrierung in React mit Typescript gebaut. Alle Forms sind mit dem Backend verbunden und auch responsive gestyled</p>
+<p> Ich habe das Login und die Registrierung in React mit TypeScript gebaut. Alle Formulare sind mit dem Backend verbunden und auch responsiv gestylt.</p>
 
-## Atomic Design 
-<p> Ich habe mein Frontend mit dem Atomic Design prinzip gebaut:</p>
+## Atomic Design
+<p> Ich habe mein Frontend mit dem Atomic Design Prinzip gebaut:</p>
 
-- **Atoms** - kleinste UI Elemente wie 'Button', 'Input' und 'ErrorMessage'
-- **Molecules** - kombination von Atoms wie 'Login- /RegisterForm'
-- **Pages** - die Seiten welche alle Molecules zusammensetzen 
+- **Atoms** - kleinste UI Elemente wie `Button`, `Input` und `ErrorMessage`
+- **Molecules** - Kombination von Atoms wie `Login- /RegisterForm`
+- **Pages** - die Seiten welche alle Molecules zusammensetzen
 
-## Styling 
-- 'global.css' - Globales Styling für den ganzen Body 
-- 'atoms.css' - Styling für alle Atoms 
-- 'molecules.css' Styling für alle Molecules 
+## Styling
+- `global.css` - Globales Styling für den ganzen Body
+- `atoms.css` - Styling für alle Atoms
+- `molecules.css` - Styling für alle Molecules
 
-## Responsiv 
-<p> Ich habe die Seiten so gestyled, dass sie sich automatisch an die verschiedenen Bildschirmgrössen anpassen.</p>
+## Responsiv
+<p> Ich habe die Seiten so gestylt, dass sie sich automatisch an die verschiedenen Bildschirmgrössen anpassen.</p>
 
 ## Seiten
-- '/login' - Loginseite mit dem Username und Passwort
-- '/register' - Registrierungsseite wo man sich registrieren kann 
-- '/listings' - Hier werden später alle Inserate angezeigt, im moment steht dort nut "Willkommen!" als Platzhalter.
+- `/login` - Loginseite mit dem Username und Passwort
+- `/register` - Registrierungsseite wo man sich registrieren kann
+- `/listings` - Hier werden später alle Inserate angezeigt, im Moment steht dort nur "Willkommen!" als Platzhalter.
 
-## Ablauf Login 
-1. User gibt Username und Passwort ein 
-2. Anfrage wird an 'POST /login' geschickt 
-3. JWT-Token wird im 'localStorage' gespeichert 
-4. User wird auf '/listings' weitergeleitet 
+## Ablauf Login
+1. User gibt Username und Passwort ein
+2. Anfrage wird an `POST /login` geschickt
+3. JWT-Token wird im `localStorage` gespeichert
+4. User wird auf `/listings` weitergeleitet
 
-## Ablauf REgistrierung 
-1. User gibt Username, Email und Passwort ein 
-2. Anfrage wird an 'POST /register' geschickt 
-3. Bei Erfolg wird eine SuccessMEssage angezeigt 
+## Ablauf Registrierung
+1. User gibt Username, Email und Passwort ein
+2. Anfrage wird an `POST /register` geschickt
+3. Bei Erfolg wird eine Erfolgsmeldung angezeigt
 4. User kann sich dann einloggen
 
-## Gefundene Fehler 
-**CORS Fehler:** Der Browser hat Anfragen von 'localhost:3000' zu 'localhost:8080' blockiert 
-**Fix:** 'CoursUtil.java' erstellt und in allen Handlers eingebaut
+## Gefundene Fehler
+**CORS Fehler:** Der Browser hat Anfragen von `localhost:3000` zu `localhost:8080` blockiert.
+**Fix:** `CorsUtil.java` erstellt und in allen Handlers eingebaut.
 
 ----------------------------------------------------------------------------------------------------------------
 
-# Navbar 
-<p> Simple Navbar über der Page</p>
+# Navbar
+<p> Simple Navbar über der Page.</p>
 
-## Funktionen 
-- Link zu den Inseraten 
-- Zeigt an welcher User eingeloggt ist 
-- Logout Button 
-- Herz Icon, um die Favorisierten Inserate
+## Funktionen
+- Link zu den Inseraten
+- Zeigt an welcher User eingeloggt ist
+- Logout Button
+- Herz Icon, um die favorisierten Inserate anzuzeigen
 
-## Responsiveness 
-<p> Das Design wurde so implementiert, dass es responsive ist.</p>
+## Responsiveness
+<p> Das Design wurde so implementiert, dass es responsiv ist.</p>
 
 ----------------------------------------------------------------------------------------------------------------
-# Inserat Cards 
+# Inserat Cards
 
-<p> Auf der Startseite werden alle Inserate als Cards angeziegt mit Bild, Name und Preis. En Klick auf eine Card öffnet eine Detailansicht</p>
+<p> Auf der Startseite werden alle Inserate als Cards angezeigt mit Bild, Name und Preis. Ein Klick auf eine Card öffnet eine Detailansicht.</p>
 
-## Berechtigung 
+## Berechtigung
 - Alle User sehen die anderen Inserate
-- Ein normaler User kann nur seine eigenen Inserate bearbeiten oder löschen 
+- Ein normaler User kann nur seine eigenen Inserate bearbeiten oder löschen
 - Ein Admin kann alle Inserate bearbeiten oder löschen
 
-## Bearbeiten 
-<p> Im Detailmodus kann ein berechtigter User auf "bearbeiten" klicken, die Felder ändern und dann speichern</p>
+## Bearbeiten
+<p> Im Detailmodus kann ein berechtigter User auf "Bearbeiten" klicken, die Felder ändern und dann speichern.</p>
 
-## Löschen 
-<p> Mit "Löschen" wrd das Inserat gelöscht.</p>
+## Löschen
+<p> Mit "Löschen" wird das Inserat gelöscht.</p>
 
 ----------------------------------------------------------------------------------------------------------------
 
-# Inserat erstellen über + Button und Detaillisten ansicht 
+# Inserat erstellen über + Button und Detaillistenansicht
 
-<p> Auf der '/listings Seite gibt es unten Rechts einen '+' Button. Ein Klick öffnet eine Karte mit allen Feldern, welche man ausfüllen kann</p>
+<p> Auf der `/listings` Seite gibt es unten rechts einen `+` Button. Ein Klick öffnet eine Karte mit allen Feldern, welche man ausfüllen kann.</p>
 
-## Felder 
-- Name 
-- Zustand 
-- Grösse 
-- Preis 
-- Beschreibung 
-- Bild 
+## Felder
+- Name
+- Zustand
+- Grösse
+- Preis
+- Beschreibung
+- Bild
 - Sichtbarkeit (Öffentlich/Privat)
 
 ## Ablauf
-1. User füllt das Formular im der Karte aus
+1. User füllt das Formular in der Karte aus
 2. Daten werden per `POST /listings` an das Backend geschickt
 3. Falls ein Bild ausgewählt wurde, wird es per `POST /image/{id}` zum neu erstellten Inserat hochgeladen
 4. Das neue Inserat erscheint sofort in der Übersicht
@@ -503,9 +503,9 @@ ALTER TABLE users ADD COLUMN role VARCHAR(20) DEFAULT 'user';
 ## Sichtbarkeit
 - **Öffentlich:** Das Inserat ist für alle User sichtbar
 - **Privat:** Das Inserat ist nur für den Ersteller sichtbar
-- 
+
 ## Detailseite / Detail-Modal
-<p>Ein Klick auf eine Inserat Card öffnet ein Detail Karte mit allen Informationen zum Inserat.</p>
+<p>Ein Klick auf eine Inserat Card öffnet eine Detailkarte mit allen Informationen zum Inserat.</p>
 
 ## Angezeigte Informationen
 - Bild
@@ -536,7 +536,7 @@ ALTER TABLE users ADD COLUMN role VARCHAR(20) DEFAULT 'user';
 
 ## Endpunkte
 - `GET /favorites` – Alle favorisierten Inserate des eingeloggten Users abrufen
-- `POST /favorites/{listingId}` – Favorit hinzufügen oder entfernen 
+- `POST /favorites/{listingId}` – Favorit hinzufügen oder entfernen
 
 ## Berechtigungen
 - Nur eingeloggte User können favorisieren
@@ -615,6 +615,7 @@ cd frontend
 npm install
 npm start
 ```
+
 ----------------------------------------------------------------------------------------------------------------
 
 # Anmeldung mit Email oder Username
@@ -672,6 +673,7 @@ Eine `UNIQUE` Constraint verhindert doppelte Einträge.</p>
 - Eigene Inserate können nicht in den Warenkorb gelegt werden
 
 ----------------------------------------------------------------------------------------------------------------
+
 # Profilbild in der Navbar
 
 <p> Statt "Eingeloggt als [username]" wird in der Navbar das Profilbild des Users angezeigt.
@@ -679,10 +681,12 @@ Falls noch kein Profilbild hochgeladen wurde, wird die erste Initiale des Userna
 Ein Klick auf das Bild führt zur Profilseite. </p>
 
 ----------------------------------------------------------------------------------------------------------------
+
 # Validierung
 
 ## Registrierung
 <p>Alle Felder (Username, Email, Passwort) sind Pflichtfelder.</p>
+
 - Email muss ein `@` enthalten
 - Passwort muss mindestens 4 Zeichen haben
 - Username und Email müssen einzigartig sein
@@ -693,6 +697,7 @@ Ein Klick auf das Bild führt zur Profilseite. </p>
 - Mindestens ein Feld muss ausgefüllt sein
 
 ----------------------------------------------------------------------------------------------------------------
+
 # Styling
 <p> Das Frontend verwendet ausschliesslich `rem` Einheiten für alle Grössenangaben, um eine konsistente und skalierbare Darstellung zu gewährleisten. Die Basis-Schriftgrösse des Browsers (standardmässig 16px) dient als Referenz. </p>
 
@@ -708,6 +713,7 @@ Ein Klick auf das Bild führt zur Profilseite. </p>
 - `32px` → `2rem`
 
 ----------------------------------------------------------------------------------------------------------------
+
 # Letzter Test & Bugfixing
 <p>Die gesamte App wurde manuell durchgetestet. Alle Hauptfunktionen wurden überprüft und funktionieren korrekt. </p>
 
@@ -729,3 +735,7 @@ Ein Klick auf das Bild führt zur Profilseite. </p>
 
 ## Ergebnis
 Keine kritischen Fehler gefunden. Die App funktioniert stabil und alle Features verhalten sich wie erwartet.
+
+----------------------------------------------------------------------------------------------------------------
+# ReadMe bearbeiten 
+Ich habe versucht mein Readme so gut es geht in der kurzen zet zu bearbeiten und zu perfektionierne.
